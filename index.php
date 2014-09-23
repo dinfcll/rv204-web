@@ -7,7 +7,7 @@ if(isset($_POST['nom_utilisateur'])) {
     {
         header('Location: info.php');
     } else {
-        $message = "Utilisateur ou mot de passe invalide.";
+        $message = "<div class=\"alert alert-danger\">Utilisateur ou mot de passe invalide.</div>";
     }
 }
 
@@ -34,7 +34,7 @@ if(isset($_POST['nom_utilisateur'])) {
 <div class="container">
     <form class="form-signin" action="index.php" method="post">
         <?php
-        echo "<div class=\"alert alert-danger\">".$message."</div>";
+        echo $message;
         ?>
         <h2 class="form-signin-heading">RV204</h2>
         <input type="text" name="nom_utilisateur" class="form-control" placeholder="Nom d'utilisateur" required autofocus>
