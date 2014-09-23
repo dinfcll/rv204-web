@@ -1,3 +1,15 @@
+<?php
+session_start();
+$utilisateur = "";
+
+if(isset($_SESSION['nom_utilisateur'])) {
+    $utilisateur = $_SESSION['nom_utilisateur'];
+} else {
+    header('Location: index.php');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -18,8 +30,6 @@
 
 <body>
 
-<!-- TODO: Valider l'utilisateur -->
-
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -30,7 +40,7 @@
 
 <div class="container">
     <div class="page-header">
-        <h1>Olivier Lafleur</h1> <!-- TODO: Requête pour récupérer le nom -->
+        <h1>Olivier Lafleur (<?php echo $utilisateur ?>)</h1>
     </div>
 
     <form>

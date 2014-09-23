@@ -5,6 +5,8 @@ $monAcces = new AccesBD();
 if(isset($_POST['nom_utilisateur'])) {
     if($monAcces->utilisateurValide($_POST['nom_utilisateur'], $_POST['password']))
     {
+        session_start();
+        $_SESSION['nom_utilisateur'] = $_POST['nom_utilisateur'];
         header('Location: info.php');
     } else {
         $message = "<div class=\"alert alert-danger\">Utilisateur ou mot de passe invalide.</div>";
