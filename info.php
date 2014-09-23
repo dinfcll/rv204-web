@@ -23,7 +23,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">RV204</a>
+            <a class="navbar-brand" href="index.html">RV204</a>
         </div>
     </div>
 </div>
