@@ -23,20 +23,22 @@ class AccesBD
                               nom_complet VARCHAR(250),
                               username VARCHAR (50),
                               password VARCHAR (50),
-                              couleur VARCHAR (10)
+                              couleur VARCHAR (10),
+                              image VARCHAR (50)
                               );
                           ");
     }
 
-    public function insererEmploye($nom_complet, $username, $password, $couleur)
+    public function insererEmploye($nom_complet, $username, $password, $couleur, $image)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO users (nom_complet, username, password, couleur)
-                                     VALUES (:nom_complet, :username, :password, :couleur)");
+        $stmt = $this->pdo->prepare("INSERT INTO users (nom_complet, username, password, couleur, image)
+                                     VALUES (:nom_complet, :username, :password, :couleur, :image)");
         $stmt->execute(array(
             'nom_complet' => $nom_complet,
             'username' => $username,
             'password' => $password,
-            'couleur' => $couleur
+            'couleur' => $couleur,
+            'image' => $image
         ));
     }
 
@@ -52,10 +54,15 @@ class AccesBD
 
     public function creerAdministrateur()
     {
-        $this->insererEmploye("Administrateur", "admin", "admin", "#ff0000");
+        $this->insererEmploye("Administrateur", "admin", "admin", "#ff0000", "");
     }
 
-    private function recupererUtilisateur($username)
+    public function creerOlivier()
+    {
+        $this->insererEmploye("Olivier Lafleur", "olivier", "olivier", "#00ff00", "moi.jpg");
+    }
+
+    public function recupererUtilisateur($username)
     {
         $stmt = $this->pdo->prepare("SELECT * FROM users WHERE username = '" . $username . "'");
         $stmt->execute();
