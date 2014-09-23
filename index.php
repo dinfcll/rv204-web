@@ -1,3 +1,18 @@
+<?php
+include('accesbd.php');
+
+$monAcces = new AccesBD();
+if(isset($_POST['nom_utilisateur'])) {
+    if($monAcces->utilisateurValide($_POST['nom_utilisateur'], $_POST['password']))
+    {
+        header('Location: info.php');
+    } else {
+        $message = "Utilisateur ou mot de passe invalide.";
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -17,8 +32,10 @@
 <body>
 
 <div class="container">
-
-    <form class="form-signin" action="info.php" method="post">
+    <form class="form-signin" action="index.php" method="post">
+        <?php
+        echo "<div class=\"alert alert-danger\">".$message."</div>";
+        ?>
         <h2 class="form-signin-heading">RV204</h2>
         <input type="text" name="nom_utilisateur" class="form-control" placeholder="Nom d'utilisateur" required autofocus>
         <input type="password" name="password" class="form-control" placeholder="Mot de passe" required>
