@@ -3,7 +3,9 @@
 include_once('accesbd.php');
 
 $monAcces = new AccesBD();
-$monAcces->creerTableEmployes();
-$monAcces->creerAdministrateur();
-$monAcces->creerOlivier();
-$monAcces->creerGuillaume();
+if ($monAcces->applicationNonInstallee()) {
+    $monAcces->creerTableEmployes();
+    $monAcces->creerAdministrateur();
+    $monAcces->creerOlivier();
+    $monAcces->creerGuillaume();
+}

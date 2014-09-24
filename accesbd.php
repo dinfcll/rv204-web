@@ -94,4 +94,15 @@ class AccesBD
 
         return $result[0]['image'];
     }
+
+    public function applicationNonInstallee()
+    {
+        try {
+            $this->pdo->prepare("SELECT 1 FROM users LIMIT 1");
+        } catch (Exception $e) {
+            return true;
+        }
+
+        return false;
+    }
 }

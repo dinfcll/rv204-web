@@ -1,5 +1,6 @@
 <?php
-include('accesbd.php');
+include 'accesbd.php';
+include 'install.php';
 
 $monAcces = new AccesBD();
 if(isset($_POST['nom_utilisateur'])) {
