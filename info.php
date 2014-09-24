@@ -1,13 +1,22 @@
 <?php
 include "accesbd.php";
+include "info-helper.php";
 
 session_start();
 
 $utilisateur = "";
+$message = "";
 $monacces = new AccesBD();
 
-if(isset($_SESSION['nom_utilisateur'])) {
+if(utilisateurConnecte()) {
     $utilisateur = $monacces->recupererUtilisateur($_SESSION['nom_utilisateur']);
+
+    if(estRetourFormulaire()) {
+        $message = maj($utilisateur, $monacces);
+
+        $utilisateur = $monacces->recupererUtilisateur($_SESSION['nom_utilisateur']);
+    }
+
 } else {
     header('Location: index.php');
 }
@@ -44,23 +53,25 @@ if(isset($_SESSION['nom_utilisateur'])) {
 
 <div class="container">
     <div class="page-header">
+        <?php echo $message ?>
         <h1><?php echo $utilisateur['nom_complet'] ?> (<?php echo $utilisateur['username'] ?>)</h1>
     </div>
 
-    <form>
+    <form method="post" action="info.php" enctype="multipart/form-data">
         <h3>Votre couleur</h3>
         <input type="color" name="couleurpreferee" value="<?php echo $utilisateur['couleur'] ?>">
 
         <h3>Votre image</h3>
-        <input type="file">
-        <img src="<?php echo $utilisateur['image'] ?>" width="300px"><br>
+        <input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
+        <input type="file" name="image">
+        <img src="<?php //TODO : afficher image choisie ?>" width="300px"><br>
 
         <h3>Votre mot de passe</h3>
         <label>
-        Mot de passe : <input type="text">
+        Mot de passe : <input type="password" name="password1">
         </label><br>
         <label>
-        Entrez de nouveau : <input type="text">
+        Entrez de nouveau : <input type="password" name="password2">
         </label><br>
 
 

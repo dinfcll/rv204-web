@@ -24,22 +24,31 @@ class AccesBD
                               username VARCHAR (50),
                               password VARCHAR (50),
                               couleur VARCHAR (10),
-                              image VARCHAR (50)
+                              image BLOB
                               );
                           ");
     }
 
-    public function insererEmploye($nom_complet, $username, $password, $couleur, $image)
+    public function insererEmploye($nom_complet, $username, $password, $couleur)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO users (nom_complet, username, password, couleur, image)
-                                     VALUES (:nom_complet, :username, :password, :couleur, :image)");
+        $stmt = $this->pdo->prepare("INSERT INTO users (nom_complet, username, password, couleur)
+                                     VALUES (:nom_complet, :username, :password, :couleur)");
         $stmt->execute(array(
             'nom_complet' => $nom_complet,
             'username' => $username,
             'password' => $password,
-            'couleur' => $couleur,
-            'image' => $image
+            'couleur' => $couleur
         ));
+    }
+
+    public function majEmploye($id, $password, $couleur, $image)
+    {
+        $stmt = $this->pdo->prepare("UPDATE users
+                                     SET password='".$password."',
+                                         couleur='".$couleur."',
+                                         image=x'".$image."'
+                                     WHERE id=".$id);
+        $stmt->execute();
     }
 
     public function recupererIdUtilisateur($username)
