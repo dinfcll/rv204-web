@@ -63,7 +63,7 @@ if(utilisateurConnecte()) {
 
         <h3>Votre image</h3>
         <input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
-        <input type="file" name="image"><br>
+        <input type="file" name="image" accept="image/*"><br>
         <?php
             if($utilisateur['image'] != "") {
                 echo '<img src="image.php?id='.$utilisateur['id'].'" width="300px"><br>';
