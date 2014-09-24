@@ -10,7 +10,7 @@ function utilisateurConnecte()
     return isset($_SESSION['nom_utilisateur']);
 }
 
-function retourneImageHex()
+function retourneImage()
 {
     $uploaddir = dirname(__FILE__) . '/tmp_uploads/';
 
@@ -21,16 +21,10 @@ function retourneImageHex()
     $uploadfile = $uploaddir . basename($_FILES['image']['name']);
 
     if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadfile)) {
-        $output = exec("hexdump -ve '1/1 \"%0.2X\"' " . $uploadfile . " 2>&1", $erreur);
-
-        if (sizeof($erreur) > 1) {
-            return "";
-        }
+        return file_get_contents($uploadfile);
     } else {
         return "";
     }
-
-    return $output;
 }
 
 function maj($utilisateur, $monacces)
@@ -46,15 +40,13 @@ function maj($utilisateur, $monacces)
         }
     }
 
-    $image = "";
+    $image = $utilisateur['image'];
 
-    if (isset($_FILES['image'])) {
-        if ($_FILES['image']['size'] > 0) {
-            $image = retourneImageHex();
+    if ($_FILES['image']['size'] > 0) {
+        $image = retourneImage();
 
-            if ($image == "") {
-                return messageErreur("Erreur dans l'image");
-            }
+        if ($image == "") {
+            return messageErreur("Erreur dans l'image");
         }
     }
 

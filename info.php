@@ -63,8 +63,12 @@ if(utilisateurConnecte()) {
 
         <h3>Votre image</h3>
         <input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
-        <input type="file" name="image">
-        <img src="<?php //TODO : afficher image choisie ?>" width="300px"><br>
+        <input type="file" name="image"><br>
+        <?php
+            if($utilisateur['image'] != "") {
+                echo '<img src="image.php?id='.$utilisateur['id'].'" width="300px"><br>';
+            }
+        ?>
 
         <h3>Votre mot de passe</h3>
         <label>

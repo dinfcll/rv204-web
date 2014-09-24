@@ -46,8 +46,9 @@ class AccesBD
         $stmt = $this->pdo->prepare("UPDATE users
                                      SET password='".$password."',
                                          couleur='".$couleur."',
-                                         image=x'".$image."'
+                                         image=?
                                      WHERE id=".$id);
+        $stmt->bindValue(1, $image, PDO::PARAM_LOB);
         $stmt->execute();
     }
 
@@ -79,5 +80,13 @@ class AccesBD
         $result = $stmt->fetchAll();
 
         return $result[0];
+    }
+
+    public function genererImage($id) {
+        $stmt = $this->pdo->prepare("SELECT image FROM users WHERE id = " . $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+        return $result[0]['image'];
     }
 }
