@@ -6,3 +6,4 @@ $monAcces = new AccesBD();
 $monAcces->creerTableEmployes();
 $monAcces->creerAdministrateur();
 $monAcces->creerOlivier();
+$monAcces->creerGuillaume();

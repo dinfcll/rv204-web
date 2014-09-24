@@ -69,7 +69,12 @@ class AccesBD
 
     public function creerOlivier()
     {
-        $this->insererEmploye("Olivier Lafleur", "olivier", "olivier", "#00ff00", "moi.jpg");
+        $this->insererEmploye("Olivier Lafleur", "olivier", "olivier", "#00ff00", "");
+    }
+
+    public function creerGuillaume()
+    {
+        $this->insererEmploye("Guillaume Michaud", "michaudg", "michaudg#123", "#00ff00", "");
     }
 
     public function recupererUtilisateur($username)
