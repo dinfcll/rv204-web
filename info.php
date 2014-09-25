@@ -38,16 +38,23 @@ if(utilisateurConnecte()) {
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 
     <link href="css/style.css" rel="stylesheet">
-
 </head>
 
 <body>
-
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="index.php">RV204</a>
         </div>
+        <?php
+            if($utilisateur['isAdmin'] != 0) {
+                echo '<div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a href="admin.php">Admin</a></li>
+                        </ul>
+                      </div>';
+            }
+        ?>
     </div>
 </div>
 
@@ -79,7 +86,6 @@ if(utilisateurConnecte()) {
         <label>
         Entrez de nouveau : <input type="password" name="password2">
         </label><br>
-
 
         <button type="submit" class="btn btn-primary">Modifier</button>
     </form>

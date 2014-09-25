@@ -24,27 +24,30 @@ class AccesBD
                               username VARCHAR (50),
                               password VARCHAR (50),
                               couleur VARCHAR (10),
-                              image BLOB
+                              image BLOB,
+                              isAdmin INTEGER
                               );
                           ");
     }
 
-    public function insererEmploye($nom_complet, $username, $password, $couleur)
+    public function insererEmploye($nom_complet, $username, $password, $couleur, $isAdmin)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO users (nom_complet, username, password, couleur)
-                                     VALUES (:nom_complet, :username, :password, :couleur)");
+        $stmt = $this->pdo->prepare("INSERT INTO users (nom_complet, username, password, couleur, isAdmin)
+                                     VALUES (:nom_complet, :username, :password, :couleur, :isAdmin)");
         $stmt->execute(array(
             'nom_complet' => $nom_complet,
             'username' => $username,
             'password' => $password,
-            'couleur' => $couleur
+            'couleur' => $couleur,
+            'isAdmin' => $isAdmin
         ));
     }
 
-    public function majEmploye($id, $password, $couleur, $image)
+    public function majEmploye($id, $password, $couleur, $image, $isAdmin)
     {
         $stmt = $this->pdo->prepare("UPDATE users
                                      SET password='".$password."',
+                                         isAdmin=".$isAdmin.",
                                          couleur='".$couleur."',
                                          image=?
                                      WHERE id=".$id);
@@ -64,17 +67,17 @@ class AccesBD
 
     public function creerAdministrateur()
     {
-        $this->insererEmploye("Administrateur", "admin", "admin", "#ff0000", "");
+        $this->insererEmploye("Administrateur", "admin", "admin", "#ff0000", 1);
     }
 
     public function creerOlivier()
     {
-        $this->insererEmploye("Olivier Lafleur", "olivier", "olivier", "#00ff00", "");
+        $this->insererEmploye("Olivier Lafleur", "olivier", "olivier", "#00ff00", 0);
     }
 
     public function creerGuillaume()
     {
-        $this->insererEmploye("Guillaume Michaud", "michaudg", "michaudg#123", "#00ff00", "");
+        $this->insererEmploye("Guillaume Michaud", "michaudg", "michaudg#123", "#00ff00", 1);
     }
 
     public function recupererUtilisateur($username)
