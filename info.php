@@ -8,10 +8,10 @@ $utilisateur = "";
 $message = "";
 $monacces = new AccesBD();
 
-if(utilisateurConnecte()) {
+if (utilisateurConnecte()) {
     $utilisateur = $monacces->recupererUtilisateur($_SESSION['nom_utilisateur']);
 
-    if(estRetourFormulaire()) {
+    if (estRetourFormulaire()) {
         $message = maj($utilisateur, $monacces);
 
         $utilisateur = $monacces->recupererUtilisateur($_SESSION['nom_utilisateur']);
@@ -44,17 +44,22 @@ if(utilisateurConnecte()) {
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="index.php">RV204</a>
+            <a class="navbar-brand" href="info.php">RV204</a>
         </div>
-        <?php
-            if($utilisateur['isAdmin'] != 0) {
-                echo '<div class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse">
+            <?php
+            if ($utilisateur['isAdmin'] != 0) {
+                echo '
                         <ul class="nav navbar-nav">
                             <li><a href="admin.php">Admin</a></li>
                         </ul>
-                      </div>';
+                      ';
             }
-        ?>
+            ?>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Se déconnecter</a></li>
+            </ul>
+        </div>
     </div>
 </div>
 
@@ -69,22 +74,23 @@ if(utilisateurConnecte()) {
         <input type="color" name="couleurpreferee" value="<?php echo $utilisateur['couleur'] ?>">
 
         <h3>Votre image</h3>
-        <input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
+        <input type="hidden" name="MAX_FILE_SIZE" value="5000000"/>
         <input type="file" name="image" accept="image/*" id="image"><br>
+
         <div id="image-container">
             <?php
-                if($utilisateur['image'] != "") {
-                    echo '<img src="image.php?id='.$utilisateur['id'].'" width="300px"><br>';
-                }
+            if ($utilisateur['image'] != "") {
+                echo '<img src="image.php?id=' . $utilisateur['id'] . '" width="300px"><br>';
+            }
             ?>
         </div>
 
         <h3>Votre mot de passe</h3>
         <label>
-        Mot de passe : <input type="password" name="password1">
+            Mot de passe : <input type="password" name="password1">
         </label><br>
         <label>
-        Entrez de nouveau : <input type="password" name="password2">
+            Entrez de nouveau : <input type="password" name="password2">
         </label><br>
 
         <button type="submit" class="btn btn-primary">Modifier</button>
@@ -99,7 +105,7 @@ if(utilisateurConnecte()) {
     function afficheImage(evt) {
         var file = evt.target.files[0];
 
-        if(!file.type.match('image.*')) {
+        if (!file.type.match('image.*')) {
             return;
         }
 
