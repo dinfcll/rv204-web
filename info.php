@@ -57,7 +57,7 @@ if (utilisateurConnecte()) {
             }
             ?>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Se déconnecter</a></li>
+                <li><a href="disconnect.php">Se déconnecter</a></li>
             </ul>
         </div>
     </div>
