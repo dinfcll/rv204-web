@@ -16,6 +16,7 @@
                 <th>Admin</th>
                 <!-- TODO : Modifier -->
                 <th>Modifier</th>
+                <th>Supprimer</th>
             </tr>
             </thead>
             <tbody>
@@ -39,6 +40,8 @@
                 }
 
                 echo "<td><a href='#'>Modifier</a></td>";
+
+                echo "<td><a href='admin-supprimer.php?id=" . $user['id'] . "'>Supprimer</a></td>";
 
                 echo "</tr>";
             }

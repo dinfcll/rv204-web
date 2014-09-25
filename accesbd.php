@@ -116,4 +116,9 @@ class AccesBD
 
         return $stmt->fetchAll();
     }
+
+    public function supprimerUsager($id) {
+        $this->pdo->query("DELETE FROM users
+                           WHERE id=".$id);
+    }
 }
