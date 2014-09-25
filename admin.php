@@ -15,12 +15,6 @@ if (utilisateurConnecte()) {
         header('Location: index.php');
     }
 
-    if (estRetourFormulaire()) {
-        $message = maj($utilisateur, $monacces);
-
-        $utilisateur = $monacces->recupererUtilisateur($_SESSION['nom_utilisateur']);
-    }
-
 } else {
     header('Location: index.php');
 }
