@@ -1,26 +1,4 @@
-<?php
-include "accesbd.php";
-include "info-helper.php";
-
-session_start();
-
-$utilisateur = "";
-$message = messageInfo("*** ATTENTION, VOUS ÊTES DANS LA SECTION ADMINISTRATEUR ***");
-$monacces = new AccesBD();
-
-if (utilisateurConnecte()) {
-    $utilisateur = $monacces->recupererUtilisateur($_SESSION['nom_utilisateur']);
-
-    if ($utilisateur['isAdmin'] == 0) {
-        header('Location: index.php');
-    }
-
-} else {
-    header('Location: index.php');
-}
-
-include "header.php";
-?>
+<?php include "admin-header.php"; ?>
 
 <div class="container">
     <div class="page-header">
@@ -68,8 +46,7 @@ include "header.php";
             </tbody>
         </table>
 
-        <!-- TODO : Nouvel utilisateur -->
-        <a href="#">Nouvel utilisateur</a>
+        <a href="admin-nouveau.php">Nouvel utilisateur</a>
 
     </div>
 

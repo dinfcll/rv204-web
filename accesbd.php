@@ -30,7 +30,7 @@ class AccesBD
                           ");
     }
 
-    public function insererEmploye($nom_complet, $username, $password, $couleur, $isAdmin)
+    public function insererEmploye($nom_complet, $username, $password, $couleur, $isAdmin = 0)
     {
         $stmt = $this->pdo->prepare("INSERT INTO users (nom_complet, username, password, couleur, isAdmin)
                                      VALUES (:nom_complet, :username, :password, :couleur, :isAdmin)");
@@ -72,7 +72,7 @@ class AccesBD
 
     public function creerOlivier()
     {
-        $this->insererEmploye("Olivier Lafleur", "olivier", "olivier", "#00ff00", 0);
+        $this->insererEmploye("Olivier Lafleur", "olivier", "olivier", "#00ff00");
     }
 
     public function creerGuillaume()

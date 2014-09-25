@@ -2,7 +2,7 @@
 
 function estRetourFormulaire()
 {
-    return isset($_POST['couleurpreferee']);
+    return !empty($_POST);
 }
 
 function utilisateurConnecte()
@@ -55,14 +55,55 @@ function maj($utilisateur, $monacces)
     return messageSucces("Votre compte a bien été mis à jour");
 }
 
-function messageErreur($message) {
-    return "<div class=\"alert alert-danger\">".$message."</div>";
+function insererUtilisateur($retourFormulaire, $monacces)
+{
+    if($retourFormulaire['nom_complet'] != "") {
+        $nom_complet = $retourFormulaire['nom_complet'];
+    } else {
+        return messageErreur("Vous devez entrer un nom complet");
+    }
+
+    if($retourFormulaire['username'] != "") {
+        $username = $retourFormulaire['username'];
+    } else {
+        return messageErreur("Vous devez entrer un nom d'utilisateur");
+    }
+
+    if ($retourFormulaire['password1'] == $retourFormulaire['password2']) {
+        $password = $retourFormulaire['password1'];
+    } else {
+        return messageErreur("Les mots de passe sont différents");
+    }
+
+    if($retourFormulaire['password1'] == "") {
+        return messageErreur("Vous devez entrer un mot de passe");
+    }
+
+    $couleur = $retourFormulaire['couleur'];
+
+    if(isset($retourFormulaire['admin'])) {
+        $isAdmin = 1;
+    } else {
+        $isAdmin = 0;
+    }
+
+
+    $monacces->insererEmploye($nom_complet, $username, $password, $couleur, $isAdmin);
+
+    return messageSucces("Le compte a bien été créé");
 }
 
-function messageSucces($message) {
-    return "<div class=\"alert alert-success\">".$message."</div>";
+function messageErreur($message)
+{
+    return "<div class=\"alert alert-danger\">" . $message . "</div>";
 }
 
-function messageInfo($message) {
-    return "<div class=\"alert alert-info\">".$message."</div>";
+function messageSucces($message)
+{
+    return "<div class=\"alert alert-success\">" . $message . "</div>";
+}
+
+function messageInfo($message)
+{
+    return "<div class=\"alert alert-info\">" . $message . "</div>";
 }
