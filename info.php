@@ -63,12 +63,14 @@ if(utilisateurConnecte()) {
 
         <h3>Votre image</h3>
         <input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
-        <input type="file" name="image" accept="image/*"><br>
-        <?php
-            if($utilisateur['image'] != "") {
-                echo '<img src="image.php?id='.$utilisateur['id'].'" width="300px"><br>';
-            }
-        ?>
+        <input type="file" name="image" accept="image/*" id="image"><br>
+        <div id="image-container">
+            <?php
+                if($utilisateur['image'] != "") {
+                    echo '<img src="image.php?id='.$utilisateur['id'].'" width="300px"><br>';
+                }
+            ?>
+        </div>
 
         <h3>Votre mot de passe</h3>
         <label>
@@ -87,6 +89,27 @@ if(utilisateurConnecte()) {
 <!-- Bootstrap et jQuery -->
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script language="JavaScript">
+    function afficheImage(evt) {
+        var file = evt.target.files[0];
 
+        if(!file.type.match('image.*')) {
+            return;
+        }
+
+        var reader = new FileReader();
+
+        reader.onload = (function() {
+            return function(e) {
+                document.getElementById('image-container').innerHTML =
+                    '<img src="' + e.target.result + '" width=300px><br>';
+            };
+        })();
+
+        reader.readAsDataURL(file);
+    }
+
+    document.getElementById('image').addEventListener('change', afficheImage, false);
+</script>
 </body>
 </html>
