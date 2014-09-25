@@ -108,4 +108,12 @@ class AccesBD
 
         return false;
     }
+
+    public function recupererTousUtilisateurs()
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM users");
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
 }

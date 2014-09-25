@@ -62,3 +62,7 @@ function messageErreur($message) {
 function messageSucces($message) {
     return "<div class=\"alert alert-success\">".$message."</div>";
 }
+
+function messageInfo($message) {
+    return "<div class=\"alert alert-info\">".$message."</div>";
+}
