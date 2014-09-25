@@ -81,9 +81,4 @@ include "header.php";
 
 </div>
 
-<!-- Bootstrap et jQuery -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-
-</body>
-</html>
+<? include "footer.php"; ?>

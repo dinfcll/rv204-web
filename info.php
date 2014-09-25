@@ -60,9 +60,6 @@ include "header.php";
 
 </div>
 
-<!-- Bootstrap et jQuery -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
 <script language="JavaScript">
     function afficheImage(evt) {
         var file = evt.target.files[0];
@@ -85,5 +82,5 @@ include "header.php";
 
     document.getElementById('image').addEventListener('change', afficheImage, false);
 </script>
-</body>
-</html>
+
+<? include "footer.php"; ?>
