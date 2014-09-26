@@ -121,4 +121,22 @@ class AccesBD
         $this->pdo->query("DELETE FROM users
                            WHERE id=".$id);
     }
+
+    public function supprimerTable()
+    {
+        $this->pdo->query("DROP TABLE IF EXISTS users;");
+    }
+
+    public function creerUsagersStandards()
+    {
+        $this->insererEmploye("Administrateur", "admin", "admin#123", "#ff0000", 1);
+        $this->insererEmploye("Olivier Lafleur", "lafleuro", "admin#123", "#ffff00", 1);
+        $this->insererEmploye("Guillaume Michaud", "michaudg", "admin#123", "#ff00ff", 1);
+        $this->insererEmploye("Mélissa Clermont", "clermontm", "admin#123", "#00ffff");
+        $this->insererEmploye("Gilles Champagne", "champagneg", "admin#123", "#00ff00");
+        $this->insererEmploye("Josée Lainesse", "lainessej", "admin#123", "#0000ff");
+        $this->insererEmploye("Marc Deslandes", "deslandesm", "admin#123", "#ffffff");
+        $this->insererEmploye("Lise Provencher", "provencherl", "admin#123", "#000000");
+
+    }
 }
