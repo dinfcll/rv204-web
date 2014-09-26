@@ -57,8 +57,9 @@ function maj($utilisateur, $monacces)
 
 function insererUtilisateur($retourFormulaire, $monacces)
 {
-    if($retourFormulaire['nom_complet'] != "") {
-        $nom_complet = $retourFormulaire['nom_complet'];
+    if($retourFormulaire['prenom'] != "" and $retourFormulaire['nomfamille'] != "") {
+        $prenom = $retourFormulaire['prenom'];
+        $nomfamille = $retourFormulaire['nomfamille'];
     } else {
         return messageErreur("Vous devez entrer un nom complet");
     }
@@ -88,7 +89,7 @@ function insererUtilisateur($retourFormulaire, $monacces)
     }
 
 
-    $monacces->insererEmploye($nom_complet, $username, $password, $couleur, $isAdmin);
+    $monacces->insererEmploye($prenom, $nomfamille, $username, $password, $couleur, $isAdmin);
 
     return messageSucces("Le compte a bien été créé");
 }

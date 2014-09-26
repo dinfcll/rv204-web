@@ -25,9 +25,9 @@
             foreach ($users as $user) {
                 echo "<tr>";
                 echo "<td>" . $user['id'] . "</td>";
-                echo "<td>" . $user['nom_complet'] . "</td>";
+                echo "<td>" . $user['firstName'] . " " . $user['lastName'] . "</td>";
                 echo "<td>" . $user['username'] . "</td>";
-                echo "<td bgcolor=" . $user['couleur'] . "></td>";
+                echo "<td bgcolor=" . $user['color'] . "></td>";
                 if ($user['image'] != "") {
                     echo "<td><a href='image.php?id=" . $user['id'] . "'><img src='image.php?id=" . $user['id'] . "' width=100px></a></td>";
                 } else {

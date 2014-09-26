@@ -18,7 +18,11 @@ if (estRetourFormulaire()) {
 
     <form method="post" action="admin-nouveau.php" enctype="multipart/form-data">
         <label>
-            Nom complet : <input type="text" name="nom_complet" placeholder="(ex : Olivier Lafleur)">
+            Prénom : <input type="text" name="prenom" placeholder="(ex : Olivier)">
+        </label><br>
+
+        <label>
+            Nom : <input type="text" name="nomfamille" placeholder="(ex : Lafleur)">
         </label><br>
 
         <label>

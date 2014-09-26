@@ -28,12 +28,12 @@ include "header.php";
 <div class="container">
     <div class="page-header">
         <?php echo $message ?>
-        <h1><?php echo $utilisateur['nom_complet'] ?> (<?php echo $utilisateur['username'] ?>)</h1>
+        <h1><?php echo $utilisateur['firstName'] ?> (<?php echo $utilisateur['username'] ?>)</h1>
     </div>
 
     <form method="post" action="info.php" enctype="multipart/form-data">
         <h3>Votre couleur</h3>
-        <input type="color" name="couleurpreferee" value="<?php echo $utilisateur['couleur'] ?>">
+        <input type="color" name="couleurpreferee" value="<?php echo $utilisateur['color'] ?>">
 
         <h3>Votre image</h3>
         <input type="hidden" name="MAX_FILE_SIZE" value="5000000"/>

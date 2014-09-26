@@ -20,35 +20,37 @@ class AccesBD
     {
         $this->pdo->query("CREATE TABLE IF NOT EXISTS users (
                               id INTEGER PRIMARY KEY AUTOINCREMENT,
-                              nom_complet VARCHAR(250),
+                              firstName VARCHAR(50),
+                              lastName VARCHAR(50),
                               username VARCHAR (50),
                               password VARCHAR (50),
-                              couleur VARCHAR (10),
+                              color VARCHAR (10),
                               image BLOB,
                               isAdmin INTEGER
                               );
                           ");
     }
 
-    public function insererEmploye($nom_complet, $username, $password, $couleur, $isAdmin = 0)
+    public function insererEmploye($firstName, $lastName, $username, $password, $color, $isAdmin = 0)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO users (nom_complet, username, password, couleur, isAdmin)
-                                     VALUES (:nom_complet, :username, :password, :couleur, :isAdmin)");
+        $stmt = $this->pdo->prepare("INSERT INTO users (firstName, lastName, username, password, color, isAdmin)
+                                     VALUES (:firstName, :lastName, :username, :password, :color, :isAdmin)");
         $stmt->execute(array(
-            'nom_complet' => $nom_complet,
+            'firstName' => $firstName,
+            'lastName' => $lastName,
             'username' => $username,
             'password' => $password,
-            'couleur' => $couleur,
+            'color' => $color,
             'isAdmin' => $isAdmin
         ));
     }
 
-    public function majEmploye($id, $password, $couleur, $image, $isAdmin)
+    public function majEmploye($id, $password, $color, $image, $isAdmin)
     {
         $stmt = $this->pdo->prepare("UPDATE users
                                      SET password='".$password."',
                                          isAdmin=".$isAdmin.",
-                                         couleur='".$couleur."',
+                                         color='".$color."',
                                          image=?
                                      WHERE id=".$id);
         $stmt->bindValue(1, $image, PDO::PARAM_LOB);
@@ -67,17 +69,17 @@ class AccesBD
 
     public function creerAdministrateur()
     {
-        $this->insererEmploye("Administrateur", "admin", "admin", "#ff0000", 1);
+        $this->insererEmploye("Vrai", "Administrateur", "admin", "admin", "#ff0000", 1);
     }
 
     public function creerOlivier()
     {
-        $this->insererEmploye("Olivier Lafleur", "olivier", "olivier", "#00ff00");
+        $this->insererEmploye("Olivier", "Lafleur", "olivier", "olivier", "#00ff00");
     }
 
     public function creerGuillaume()
     {
-        $this->insererEmploye("Guillaume Michaud", "michaudg", "michaudg#123", "#00ff00", 1);
+        $this->insererEmploye("Guillaume", "Michaud", "michaudg", "michaudg#123", "#00ff00", 1);
     }
 
     public function recupererUtilisateur($username)
@@ -129,14 +131,14 @@ class AccesBD
 
     public function creerUsagersStandards()
     {
-        $this->insererEmploye("Administrateur", "admin", "admin#123", "#ff0000", 1);
-        $this->insererEmploye("Olivier Lafleur", "lafleuro", "admin#123", "#ffff00", 1);
-        $this->insererEmploye("Guillaume Michaud", "michaudg", "admin#123", "#ff00ff", 1);
-        $this->insererEmploye("Mélissa Clermont", "clermontm", "admin#123", "#00ffff");
-        $this->insererEmploye("Gilles Champagne", "champagneg", "admin#123", "#00ff00");
-        $this->insererEmploye("Josée Lainesse", "lainessej", "admin#123", "#0000ff");
-        $this->insererEmploye("Marc Deslandes", "deslandesm", "admin#123", "#ffffff");
-        $this->insererEmploye("Lise Provencher", "provencherl", "admin#123", "#000000");
+        $this->insererEmploye("Vrai", "Administrateur", "admin", "admin#123", "#ff0000", 1);
+        $this->insererEmploye("Olivier", "Lafleur", "lafleuro", "admin#123", "#ffff00", 1);
+        $this->insererEmploye("Guillaume", "Michaud", "michaudg", "admin#123", "#ff00ff", 1);
+        $this->insererEmploye("Mélissa", "Clermont", "clermontm", "admin#123", "#00ffff");
+        $this->insererEmploye("Gilles", "Champagne", "champagneg", "admin#123", "#00ff00");
+        $this->insererEmploye("Josée", "Lainesse", "lainessej", "admin#123", "#0000ff");
+        $this->insererEmploye("Marc", "Deslandes", "deslandesm", "admin#123", "#ffffff");
+        $this->insererEmploye("Lise", "Provencher", "provencherl", "admin#123", "#000000");
 
     }
 }
