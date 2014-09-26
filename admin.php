@@ -29,7 +29,8 @@
                 echo "<td>" . $user['username'] . "</td>";
                 echo "<td bgcolor=" . $user['color'] . "></td>";
                 if ($user['image'] != "") {
-                    echo "<td><a href='image.php?id=" . $user['id'] . "'><img src='image.php?id=" . $user['id'] . "' width=100px></a></td>";
+                    echo "<td><a href='image.php?id=" . $user['id'] . "'><img src='image.php?id=" . $user['id']
+                        . "' width=100px></a></td>";
                 } else {
                     echo "<td></td>";
                 }
@@ -41,7 +42,8 @@
 
                 echo "<td><a href='#'>Modifier</a></td>";
 
-                echo "<td><a href='admin-supprimer.php?id=" . $user['id'] . "'>Supprimer</a></td>";
+                echo "<td><a href='admin-supprimer.php?id=" . $user['id']
+                    . "' onclick=\"return confirm('Êtes vous sûr de vouloir supprimer l\'utilisateur?')\">Supprimer</a></td>";
 
                 echo "</tr>";
             }
