@@ -13,7 +13,7 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Nom complet</th>
+                <th>Employé</th>
                 <th>Utilisateur</th>
                 <th>Couleur</th>
                 <th>Image</th>
