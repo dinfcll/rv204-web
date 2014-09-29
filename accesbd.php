@@ -136,14 +136,14 @@ class AccesBD
 
     public function creerUsagersStandards()
     {
-        $this->insererEmploye("Vrai", "Administrateur", "admin", "admin#123", "#ff0000", "michaudg@cll.qc.ca", 1);
-        $this->insererEmploye("Olivier", "Lafleur", "lafleuro", "admin#123", "#ffff00", "olivier.lafleur@cll.qc.ca", 1);
-        $this->insererEmploye("Guillaume", "Michaud", "michaudg", "admin#123", "#ff00ff", "michaudg@cll.qc.ca", 1);
-        $this->insererEmploye("Mélissa", "Clermont", "clermontm", "admin#123", "#00ffff", "melissa.clermont@cll.qc.ca");
-        $this->insererEmploye("Gilles", "Champagne", "champagneg", "admin#123", "#00ff00", "gilles.champagne@cll.qc.ca");
-        $this->insererEmploye("Josée", "Lainesse", "lainessej", "admin#123", "#0000ff", "josee.lainesse@cll.qc.ca");
-        $this->insererEmploye("Marc", "Deslandes", "deslandesm", "admin#123", "#ffffff", "marc.deslandes@cll.qc.ca");
-        $this->insererEmploye("Lise", "Provencher", "provencherl", "admin#123", "#000000", "lise.provencher@cll.qc.ca");
+        $this->insererEmploye("Vrai", "Administrateur", "admin", "admin#123", "#ff0000", "michaudg@cll.qc.ca", 1, file_get_contents("usagers_images/vantard.png"));
+        $this->insererEmploye("Olivier", "Lafleur", "lafleuro", "admin#123", "#ffff00", "olivier.lafleur@cll.qc.ca", 1, file_get_contents("usagers_images/sauvage.png"));
+        $this->insererEmploye("Guillaume", "Michaud", "michaudg", "admin#123", "#ff00ff", "michaudg@cll.qc.ca", 1, file_get_contents("usagers_images/grandschtroumpf.png"));
+        $this->insererEmploye("Mélissa", "Clermont", "clermontm", "admin#123", "#00ffff", "melissa.clermont@cll.qc.ca", 0, file_get_contents("usagers_images/schtroumpfette.png"));
+        $this->insererEmploye("Gilles", "Champagne", "champagneg", "admin#123", "#00ff00", "gilles.champagne@cll.qc.ca", 0, file_get_contents("usagers_images/crayon.png"));
+        $this->insererEmploye("Josée", "Lainesse", "lainessej", "admin#123", "#0000ff", "josee.lainesse@cll.qc.ca", 0, file_get_contents("usagers_images/bebe.png"));
+        $this->insererEmploye("Marc", "Deslandes", "deslandesm", "admin#123", "#ffffff", "marc.deslandes@cll.qc.ca", 0, file_get_contents("usagers_images/fleur.png"));
+        $this->insererEmploye("Lise", "Provencher", "provencherl", "admin#123", "#000000", "lise.provencher@cll.qc.ca", 0, file_get_contents("usagers_images/tada.png"));
 
     }
 }
