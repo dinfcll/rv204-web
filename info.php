@@ -75,10 +75,22 @@ include "header.php";
 
         reader.onload = (function() {
             return function(e) {
-                jcrop_api.enable();
-                jcrop_api.setImage(e.target.result);
-                jcrop_api.setSelect([0, 400, 300, 0]);
-                document.getElementById('image-explication').innerHTML = '<b>Veuillez sélectionner la zone d\'intérêt</b>';
+                var image = new Image();
+                image.src = e.target.result;
+
+                image.onload = function() {
+                    if(this.width < 300 || this.height < 400) {
+                        jQuery(function($) {
+                            $('#image').val("");
+                        });
+                        window.alert('Image trop petite');
+                    } else {
+                        jcrop_api.enable();
+                        jcrop_api.setImage(this.src);
+                        jcrop_api.setSelect([0, 400, 300, 0]);
+                        document.getElementById('image-explication').innerHTML = '<b>Veuillez sélectionner la zone d\'intérêt</b>';
+                    }
+                };
             };
         })();
 
