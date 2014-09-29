@@ -32,19 +32,21 @@ class AccesBD
                           ");
     }
 
-    public function insererEmploye($firstName, $lastName, $username, $password, $color, $email, $isAdmin = 0)
+    public function insererEmploye($firstName, $lastName, $username, $password, $color, $email, $isAdmin = 0, $image = "")
     {
-        $stmt = $this->pdo->prepare("INSERT INTO users (firstName, lastName, username, password, color, isAdmin, email)
-                                     VALUES (:firstName, :lastName, :username, :password, :color, :isAdmin, :email)");
-        $stmt->execute(array(
-            'firstName' => $firstName,
-            'lastName' => $lastName,
-            'username' => $username,
-            'password' => $password,
-            'color' => $color,
-            'isAdmin' => $isAdmin,
-            'email' => $email
-        ));
+        $stmt = $this->pdo->prepare("INSERT INTO users (firstName, lastName, username, password, color, isAdmin, email, image)
+                                     VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+
+        $stmt->bindValue(1, $firstName);
+        $stmt->bindValue(2, $lastName);
+        $stmt->bindValue(3, $username);
+        $stmt->bindValue(4, $password);
+        $stmt->bindValue(5, $color);
+        $stmt->bindValue(6, $isAdmin);
+        $stmt->bindValue(7, $email);
+        $stmt->bindValue(8, $image, PDO::PARAM_LOB);
+
+        $stmt->execute();
     }
 
     public function majEmploye($id, $password, $color, $image, $isAdmin, $email)
