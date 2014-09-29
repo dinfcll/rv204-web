@@ -47,7 +47,7 @@ include "header.php";
             if ($utilisateur['image'] != "") {
                 echo '<img src="image.php?id=' . $utilisateur['id'] . '" width="300px" id="target"><br>';
             } else {
-                echo '<img src="" width="300px" id="target"><br>';
+                echo '<img src="" width="300px" height="400px" id="target"><br>';
             }
             ?>
         </div>
