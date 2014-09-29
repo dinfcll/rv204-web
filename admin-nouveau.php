@@ -22,11 +22,11 @@ if (estRetourFormulaire()) {
 
     <form method="post" action="admin-nouveau.php" enctype="multipart/form-data">
         <label>
-            Prénom : <input type="text" name="prenom" placeholder="(ex : Olivier)">
+            Prénom : <input type="text" name="prenom" id="prenom" placeholder="(ex : Olivier)" onkeyup="proposeCourriel()">
         </label><br>
 
         <label>
-            Nom : <input type="text" name="nomfamille" placeholder="(ex : Lafleur)">
+            Nom : <input type="text" name="nomfamille" id="nomfamille" placeholder="(ex : Lafleur)" onkeyup="proposeCourriel()">
         </label><br>
 
         <label>
@@ -34,7 +34,7 @@ if (estRetourFormulaire()) {
         </label><br>
 
         <label>
-            Courriel : <input type="email" name="email" placeholder="(ex: admin@admin.com)">
+            Courriel : <input type="email" name="email" id="email" placeholder="(ex: admin@admin.com)">
         </label><br>
 
         <label>
@@ -56,5 +56,27 @@ if (estRetourFormulaire()) {
     </form>
 
 </div>
+
+<script language="JavaScript">
+    function proposeCourriel() {
+        var prenom = cleanUpSpecialChars(document.getElementById('prenom').value.toLowerCase());
+        var nomfamille = cleanUpSpecialChars(document.getElementById('nomfamille').value.toLowerCase());
+
+        if(prenom != "" || nomfamile != "") {
+            document.getElementById('email').value = prenom + "." + nomfamille + "@cll.qc.ca";
+        }
+    }
+
+    function cleanUpSpecialChars(str)
+    {
+        str = str.replace(/[àáâãäå]/g,"a");
+        str = str.replace(/[èéêë]/g,"e");
+        str = str.replace(/[î]/g,"i");
+        str = str.replace(/[ô]/g,"o");
+        str = str.replace(/[ ']/g,"");
+        str = str.replace(/[ûü]/g,"u");
+        return str.replace(/[^a-z0-9]/gi,''); // final clean up
+    }
+</script>
 
 <?php include "footer.php"; ?>
