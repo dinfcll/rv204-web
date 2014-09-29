@@ -50,7 +50,7 @@ function maj($utilisateur, $monacces)
         }
     }
 
-    $monacces->majEmploye($utilisateur['id'], $password, $couleur, $image, $utilisateur['isAdmin']);
+    $monacces->majEmploye($utilisateur['id'], $password, $couleur, $image, $utilisateur['isAdmin'], $utilisateur['email']);
 
     return messageSucces("Votre compte a bien été mis à jour");
 }
@@ -89,7 +89,7 @@ function insererUtilisateur($retourFormulaire, $monacces)
     }
 
 
-    $monacces->insererEmploye($prenom, $nomfamille, $username, $password, $couleur, $isAdmin);
+    $monacces->insererEmploye($prenom, $nomfamille, $username, $password, $couleur, $retourFormulaire['email'], $isAdmin);
 
     return messageSucces("Le compte a bien été créé");
 }

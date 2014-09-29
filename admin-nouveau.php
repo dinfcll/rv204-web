@@ -34,6 +34,10 @@ if (estRetourFormulaire()) {
         </label><br>
 
         <label>
+            Courriel : <input type="email" name="email" placeholder="(ex: admin@admin.com)">
+        </label><br>
+
+        <label>
             Couleur : <input type="color" name="couleur">
         </label><br>
 

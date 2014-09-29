@@ -3,7 +3,7 @@
 <div class="container">
     <div class="page-header">
         <?php
-        if(isset($message)) {
+        if (isset($message)) {
             echo $message;
         }
         ?>
@@ -29,7 +29,7 @@
             foreach ($users as $user) {
                 echo "<tr>";
                 echo "<td>" . $user['id'] . "</td>";
-                echo "<td>" . $user['firstName'] . " " . $user['lastName'] . "</td>";
+                echo "<td><a href=\"mailto:" . $user['email'] . "\">" . $user['firstName'] . " " . $user['lastName'] . "</a></td>";
                 echo "<td>" . $user['username'] . "</td>";
                 echo "<td bgcolor=" . $user['color'] . "></td>";
                 if ($user['image'] != "") {
