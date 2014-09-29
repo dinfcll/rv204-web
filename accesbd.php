@@ -32,10 +32,10 @@ class AccesBD
                           ");
     }
 
-    public function insererEmploye($firstName, $lastName, $username, $password, $color, $email, $isAdmin = 0, $image = "")
+    public function insererEmploye($id, $firstName, $lastName, $username, $password, $color, $email, $isAdmin = 0, $image = "")
     {
-        $stmt = $this->pdo->prepare("INSERT INTO users (firstName, lastName, username, password, color, isAdmin, email, image)
-                                     VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $this->pdo->prepare("INSERT INTO users (firstName, lastName, username, password, color, isAdmin, email, image, id)
+                                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         $stmt->bindValue(1, $firstName);
         $stmt->bindValue(2, $lastName);
@@ -45,6 +45,7 @@ class AccesBD
         $stmt->bindValue(6, $isAdmin);
         $stmt->bindValue(7, $email);
         $stmt->bindValue(8, $image, PDO::PARAM_LOB);
+        $stmt->bindValue(9, $id);
 
         $stmt->execute();
     }
@@ -74,17 +75,17 @@ class AccesBD
 
     public function creerAdministrateur()
     {
-        $this->insererEmploye("Vrai", "Administrateur", "admin", "admin", "#ff0000", 1);
+        $this->insererEmploye(null, "Vrai", "Administrateur", "admin", "admin", "#ff0000", 1);
     }
 
     public function creerOlivier()
     {
-        $this->insererEmploye("Olivier", "Lafleur", "olivier", "olivier", "#00ff00", "olivier.lafleur@cll.qc.ca");
+        $this->insererEmploye(null, "Olivier", "Lafleur", "olivier", "olivier", "#00ff00", "olivier.lafleur@cll.qc.ca");
     }
 
     public function creerGuillaume()
     {
-        $this->insererEmploye("Guillaume", "Michaud", "michaudg", "michaudg#123", "#00ff00", "michaudg@cll.qc.ca", 1);
+        $this->insererEmploye(null, "Guillaume", "Michaud", "michaudg", "michaudg#123", "#00ff00", "michaudg@cll.qc.ca", 1);
     }
 
     public function recupererUtilisateur($username)
@@ -118,7 +119,7 @@ class AccesBD
 
     public function recupererTousUtilisateurs()
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM users");
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE id > 0");
         $stmt->execute();
 
         return $stmt->fetchAll();
@@ -136,14 +137,15 @@ class AccesBD
 
     public function creerUsagersStandards()
     {
-        $this->insererEmploye("Vrai", "Administrateur", "admin", "admin#123", "#ff0000", "michaudg@cll.qc.ca", 1, file_get_contents("usagers_images/vantard.png"));
-        $this->insererEmploye("Olivier", "Lafleur", "lafleuro", "admin#123", "#ffff00", "olivier.lafleur@cll.qc.ca", 1, file_get_contents("usagers_images/sauvage.png"));
-        $this->insererEmploye("Guillaume", "Michaud", "michaudg", "admin#123", "#ff00ff", "michaudg@cll.qc.ca", 1, file_get_contents("usagers_images/grandschtroumpf.png"));
-        $this->insererEmploye("Mélissa", "Clermont", "clermontm", "admin#123", "#00ffff", "melissa.clermont@cll.qc.ca", 0, file_get_contents("usagers_images/schtroumpfette.png"));
-        $this->insererEmploye("Gilles", "Champagne", "champagneg", "admin#123", "#00ff00", "gilles.champagne@cll.qc.ca", 0, file_get_contents("usagers_images/crayon.png"));
-        $this->insererEmploye("Josée", "Lainesse", "lainessej", "admin#123", "#0000ff", "josee.lainesse@cll.qc.ca", 0, file_get_contents("usagers_images/bebe.png"));
-        $this->insererEmploye("Marc", "Deslandes", "deslandesm", "admin#123", "#ffffff", "marc.deslandes@cll.qc.ca", 0, file_get_contents("usagers_images/fleur.png"));
-        $this->insererEmploye("Lise", "Provencher", "provencherl", "admin#123", "#000000", "lise.provencher@cll.qc.ca", 0, file_get_contents("usagers_images/tada.png"));
+        $this->insererEmploye(0, "", "", "admin", "admin#123", "", "", 1);
+        $this->insererEmploye(null, "Olivier", "Lafleur", "lafleuro", "admin#123", "#ffff00", "olivier.lafleur@cll.qc.ca", 1, file_get_contents("usagers_images/sauvage.png"));
+        $this->insererEmploye(null, "Guillaume", "Michaud", "michaudg", "admin#123", "#ff00ff", "michaudg@cll.qc.ca", 1, file_get_contents("usagers_images/grandschtroumpf.png"));
+        $this->insererEmploye(null, "Mélissa", "Clermont", "clermontm", "admin#123", "#00ffff", "melissa.clermont@cll.qc.ca", 0, file_get_contents("usagers_images/schtroumpfette.png"));
+        $this->insererEmploye(null, "Gilles", "Champagne", "champagneg", "admin#123", "#00ff00", "gilles.champagne@cll.qc.ca", 0, file_get_contents("usagers_images/crayon.png"));
+        $this->insererEmploye(null, "Josée", "Lainesse", "lainessej", "admin#123", "#0000ff", "josee.lainesse@cll.qc.ca", 0, file_get_contents("usagers_images/bebe.png"));
+        $this->insererEmploye(null, "Marc", "Deslandes", "deslandesm", "admin#123", "#ffffff", "marc.deslandes@cll.qc.ca", 0, file_get_contents("usagers_images/fleur.png"));
+        $this->insererEmploye(null, "Lise", "Provencher", "provencherl", "admin#123", "#000000", "lise.provencher@cll.qc.ca", 0, file_get_contents("usagers_images/tada.png"));
+        $this->insererEmploye(null, "Serge", "Lévesque", "levesques", "admin#123", "#ff0000", "serge.levesque@cll.qc.ca", 0, file_get_contents("usagers_images/vantard.png"));
 
     }
 }
