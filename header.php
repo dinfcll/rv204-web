@@ -31,7 +31,8 @@
                     aspectRatio: 3/4,
                     boxWidth: 1000,
                     minSize: [300, 400],
-                    allowSelect: false
+                    allowSelect: false,
+                    onSelect: updateCoords
                 }, function () {
                     jcrop_api = this;
                     jcrop_api.disable();
@@ -39,6 +40,14 @@
             }
 
         });
+
+        function updateCoords(c)
+        {
+            $('#x').val(c.x);
+            $('#y').val(c.y);
+            $('#w').val(c.w);
+            $('#h').val(c.h);
+        }
 
     </script>
 
