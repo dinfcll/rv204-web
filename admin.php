@@ -29,7 +29,8 @@
             foreach ($users as $user) {
                 echo "<tr>";
                 echo "<td>" . $user['id'] . "</td>";
-                echo "<td><a href=\"mailto:" . $user['email'] . "\">" . $user['firstName'] . " " . $user['lastName'] . "</a></td>";
+                echo "<td>" . $user['firstName'] . " " . $user['lastName'] . "<br><a href=\"mailto:" . $user['email']
+                    . "\">" . $user['email'] . "</a></td>";
                 echo "<td>" . $user['username'] . "</td>";
                 echo "<td bgcolor=" . $user['color'] . "></td>";
                 if ($user['image'] != "") {
