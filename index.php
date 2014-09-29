@@ -42,7 +42,9 @@ if(isset($_POST['nom_utilisateur'])) {
 <div class="container">
     <form class="form-signin" action="index.php" method="post">
         <?php
-        echo $message;
+        if(isset($message)) {
+            echo $message;
+        }
         ?>
         <h2 class="form-signin-heading">RV204</h2>
         <input type="text" name="nom_utilisateur" class="form-control" placeholder="Nom d'utilisateur" required autofocus>

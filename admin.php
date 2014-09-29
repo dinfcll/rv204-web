@@ -2,7 +2,11 @@
 
 <div class="container">
     <div class="page-header">
-        <?php echo $message ?>
+        <?php
+        if(isset($message)) {
+            echo $message;
+        }
+        ?>
         <h1>Section Administrateur</h1>
 
         <table class="table">
