@@ -38,14 +38,17 @@ include "header.php";
         <h3>Votre image</h3>
         <input type="hidden" name="MAX_FILE_SIZE" value="5000000"/>
         <input type="file" name="image" accept="image/*" id="image"><br>
-
+        <div id="image-explication"></div>
         <div id="image-container">
             <?php
             if ($utilisateur['image'] != "") {
-                echo '<img src="image.php?id=' . $utilisateur['id'] . '" width="300px"><br>';
+                echo '<img src="image.php?id=' . $utilisateur['id'] . '" width="300px" id="target"><br>';
+            } else {
+                echo '<img src="" width="300px" id="target"><br>';
             }
             ?>
         </div>
+        <div id="bouton-crop"></div>
 
         <h3>Votre mot de passe</h3>
         <label>
@@ -72,8 +75,10 @@ include "header.php";
 
         reader.onload = (function() {
             return function(e) {
-                document.getElementById('image-container').innerHTML =
-                    '<img src="' + e.target.result + '" width=300px><br>';
+                jcrop_api.enable();
+                jcrop_api.setImage(e.target.result);
+                document.getElementById('image-explication').innerHTML = '<b>Veuillez sélectionner la zone d\'intérêt</b>';
+                document.getElementById('bouton-crop').innerHTML = '<button class="btn btn-primary">Terminer la sélection</button>';
             };
         })();
 
@@ -83,4 +88,4 @@ include "header.php";
     document.getElementById('image').addEventListener('change', afficheImage, false);
 </script>
 
-<? include "footer.php"; ?>
+<?php include "footer.php"; ?>

@@ -13,6 +13,32 @@
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/jquery.Jcrop.css" rel="stylesheet">
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.Jcrop.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        var jcrop_api;
+
+        jQuery(function($) {
+            initJcrop();
+
+            function initJcrop()
+            {
+                $('#target').Jcrop({
+                    aspectRatio: 3/4
+                }, function () {
+                    jcrop_api = this;
+                    jcrop_api.disable();
+                });
+            }
+
+        });
+
+    </script>
+
 </head>
 
 <body>
