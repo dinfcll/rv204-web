@@ -89,7 +89,7 @@ include "header.php";
                         jQuery(function($) {
                             $('#image').val("");
                         });
-                        window.alert('Image trop petite');
+                        window.alert('Image trop petite. Elle doit être au moins de 300x400 px');
                     } else {
                         jcrop_api.enable();
                         jcrop_api.setImage(this.src);
