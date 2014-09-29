@@ -77,6 +77,7 @@ include "header.php";
             return function(e) {
                 jcrop_api.enable();
                 jcrop_api.setImage(e.target.result);
+                jcrop_api.setSelect([0, 400, 300, 0]);
                 document.getElementById('image-explication').innerHTML = '<b>Veuillez sélectionner la zone d\'intérêt</b>';
             };
         })();

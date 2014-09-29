@@ -29,7 +29,9 @@
             {
                 $('#target').Jcrop({
                     aspectRatio: 3/4,
-                    boxWidth: 1000
+                    boxWidth: 1000,
+                    minSize: [300, 400],
+                    allowSelect: false
                 }, function () {
                     jcrop_api = this;
                     jcrop_api.disable();
