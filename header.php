@@ -28,7 +28,8 @@
             function initJcrop()
             {
                 $('#target').Jcrop({
-                    aspectRatio: 3/4
+                    aspectRatio: 3/4,
+                    boxWidth: 1000
                 }, function () {
                     jcrop_api = this;
                     jcrop_api.disable();
