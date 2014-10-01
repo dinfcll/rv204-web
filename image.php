@@ -1,5 +1,5 @@
 <?php
-include "accesbd.php";
+include "accesbd.class.php";
 
 $monacces = new AccesBD();
 

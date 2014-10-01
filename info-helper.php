@@ -52,7 +52,7 @@ function maj($utilisateur, $monacces)
         }
     }
 
-    $monacces->majEmploye($utilisateur['id'], $password, $couleur, $image, $utilisateur['isAdmin'], $utilisateur['email']);
+    $monacces->majEmploye($utilisateur['id'], $password, $couleur, $image, $utilisateur['isAdmin'], $_POST['email']);
 
     return messageSucces("Votre compte a bien été mis à jour");
 }

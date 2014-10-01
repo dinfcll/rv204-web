@@ -1,5 +1,5 @@
 <?php
-include_once('accesbd.php');
+include_once('accesbd.class.php');
 
 $monacces = new AccesBD();
 

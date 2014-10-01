@@ -73,21 +73,6 @@ class AccesBD
         return $this->recupererUtilisateur($username)['password'] === $password;
     }
 
-    public function creerAdministrateur()
-    {
-        $this->insererEmploye(null, "Vrai", "Administrateur", "admin", "admin", "#ff0000", 1);
-    }
-
-    public function creerOlivier()
-    {
-        $this->insererEmploye(null, "Olivier", "Lafleur", "olivier", "olivier", "#00ff00", "olivier.lafleur@cll.qc.ca");
-    }
-
-    public function creerGuillaume()
-    {
-        $this->insererEmploye(null, "Guillaume", "Michaud", "michaudg", "michaudg#123", "#00ff00", "michaudg@cll.qc.ca", 1);
-    }
-
     public function recupererUtilisateur($username)
     {
         $stmt = $this->pdo->prepare("SELECT * FROM users WHERE username = '" . $username . "'");

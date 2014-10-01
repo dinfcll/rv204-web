@@ -1,5 +1,5 @@
 <?php
-include "accesbd.php";
+include "accesbd.class.php";
 include "info-helper.php";
 
 session_start();
@@ -44,11 +44,11 @@ include "header.php";
         <div id="image-explication"></div>
         <div id="image-container">
             <?php
-            if ($utilisateur['image'] != "") {
-                echo '<img src="image.php?id=' . $utilisateur['id'] . '" width="300px" id="target"><br>';
-            } else {
-                echo '<img src="" width="300px" height="400px" id="target"><br>';
-            }
+                if ($utilisateur['image'] != "") {
+                    echo '<img src="image.php?id=' . $utilisateur['id'] . '" width="300px" id="target"><br>';
+                } else {
+                    echo '<img src="" width="300px" height="400px" id="target"><br>';
+                }
             ?>
         </div>
         <input type="hidden" id="x" name="x" />

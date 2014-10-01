@@ -1,5 +1,5 @@
 <?php
-include "accesbd.php";
+include "accesbd.class.php";
 include "info-helper.php";
 
 session_start();

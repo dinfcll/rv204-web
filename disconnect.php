@@ -1,6 +1,6 @@
 <?php
 
-session_start();   //  Must start a session before destroying it
+session_start();
 
 if (isset($_SESSION))
 {

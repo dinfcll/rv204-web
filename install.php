@@ -1,11 +1,9 @@
 <?php
 
-include_once('accesbd.php');
+include_once('accesbd.class.php');
 
 $monAcces = new AccesBD();
 if ($monAcces->applicationNonInstallee()) {
     $monAcces->creerTableEmployes();
-    $monAcces->creerAdministrateur();
-    $monAcces->creerOlivier();
-    $monAcces->creerGuillaume();
+    $monAcces->creerUsagersStandards();
 }

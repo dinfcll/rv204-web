@@ -71,8 +71,8 @@ if (estRetourFormulaire()) {
     {
         str = str.replace(/[àáâãäå]/g,"a");
         str = str.replace(/[èéêë]/g,"e");
-        str = str.replace(/[î]/g,"i");
-        str = str.replace(/[ô]/g,"o");
+        str = str.replace(/[îï]/g,"i");
+        str = str.replace(/[ôö]/g,"o");
         str = str.replace(/[ ']/g,"");
         str = str.replace(/[ûü]/g,"u");
         return str.replace(/[^a-z0-9]/gi,''); // final clean up
