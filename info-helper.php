@@ -90,8 +90,17 @@ function insererUtilisateur($retourFormulaire, $monacces)
         $isAdmin = 0;
     }
 
+    $image = "";
 
-    $monacces->insererEmploye(null, $prenom, $nomfamille, $username, $password, $couleur, $retourFormulaire['email'], $isAdmin);
+    if ($_FILES['image']['size'] > 0) {
+        $image = retourneImage();
+
+        if ($image == "") {
+            return messageErreur("Erreur dans l'image");
+        }
+    }
+
+    $monacces->insererEmploye(null, $prenom, $nomfamille, $username, $password, $couleur, $retourFormulaire['email'], $isAdmin, $image);
 
     return messageSucces("Le compte a bien été créé");
 }
