@@ -57,7 +57,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="info.php">RV204</a>
+            <a class="navbar-brand" href="info.php">RV204 (<?php echo $_SESSION['nom_utilisateur'] ?>)</a>
         </div>
         <div class="collapse navbar-collapse">
             <?php
