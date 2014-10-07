@@ -44,6 +44,10 @@ function maj($utilisateur, $monacces)
 
     $image = $utilisateur['image'];
 
+    if($_FILES['image']['error'] > 0) {
+        return messageErreur("L'image est trop pesante. Quelque chose de moins lourd, peut-être?");
+    }
+
     if ($_FILES['image']['size'] > 0) {
         $image = retourneImage();
 
