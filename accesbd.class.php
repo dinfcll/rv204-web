@@ -1,5 +1,7 @@
 <?php
 
+include 'employedao.class.php';
+
 class AccesBD
 {
     private $pdo;
@@ -122,15 +124,105 @@ class AccesBD
 
     public function creerUsagersStandards()
     {
-        $this->insererEmploye(0, "", "", "admin", "admin#123", "", "", 1);
-        $this->insererEmploye(null, "Olivier", "Lafleur", "lafleuro", "admin#123", "#ffff00", "olivier.lafleur@cll.qc.ca", 1, file_get_contents("usagers_images/sauvage.png"));
-        $this->insererEmploye(null, "Guillaume", "Michaud", "michaudg", "admin#123", "#ff00ff", "michaudg@cll.qc.ca", 1, file_get_contents("usagers_images/grandschtroumpf.png"));
-        $this->insererEmploye(null, "Mélissa", "Clermont", "clermontm", "admin#123", "#00ffff", "melissa.clermont@cll.qc.ca", 0, file_get_contents("usagers_images/schtroumpfette.png"));
-        $this->insererEmploye(null, "Gilles", "Champagne", "champagneg", "admin#123", "#00ff00", "gilles.champagne@cll.qc.ca", 0, file_get_contents("usagers_images/crayon.png"));
-        $this->insererEmploye(null, "Josée", "Lainesse", "lainessej", "admin#123", "#0000ff", "josee.lainesse@cll.qc.ca", 0, file_get_contents("usagers_images/bebe.png"));
-        $this->insererEmploye(null, "Marc", "Deslandes", "deslandesm", "admin#123", "#ffffff", "marc.deslandes@cll.qc.ca", 0, file_get_contents("usagers_images/fleur.png"));
-        $this->insererEmploye(null, "Lise", "Provencher", "provencherl", "admin#123", "#000000", "lise.provencher@cll.qc.ca", 0, file_get_contents("usagers_images/tada.png"));
-        $this->insererEmploye(null, "Serge", "Lévesque", "levesques", "admin#123", "#ff0000", "serge.levesque@cll.qc.ca", 0, file_get_contents("usagers_images/vantard.png"));
+        $employeDao = new EmployeDao();
 
+        $admin = (new EmployeBuilder())
+            ->id(0)
+            ->username("admin")
+            ->password("admin#123")
+            ->isAdmin(true)
+            ->build();
+
+        $olivier = (new EmployeBuilder())
+            ->username("lafleuro")
+            ->password("admin#123")
+            ->color("#ffff00")
+            ->email("olivier.lafleur@cll.qc.ca")
+            ->firstName("Olivier")
+            ->lastName("Lafleur")
+            ->isAdmin(true)
+            ->image(file_get_contents("usagers_images/sauvage.png"))
+            ->build();
+
+        $guillaume = (new EmployeBuilder())
+            ->username("michaudg")
+            ->password("admin#123")
+            ->color("#ff00ff")
+            ->email("michaudg@cll.qc.ca")
+            ->firstName("Guillaume")
+            ->lastName("Michaud")
+            ->isAdmin(true)
+            ->image(file_get_contents("usagers_images/grandschtroumpf.png"))
+            ->build();
+
+        $melissa = (new EmployeBuilder())
+            ->username("clermontm")
+            ->password("admin#123")
+            ->color("#00ffff")
+            ->email("melissa.clermont@cll.qc.ca")
+            ->firstName("Mélissa")
+            ->lastName("Clermont")
+            ->image(file_get_contents("usagers_images/schtroumpfette.png"))
+            ->build();
+
+        $gilles = (new EmployeBuilder())
+            ->username("champagneg")
+            ->password("admin#123")
+            ->color("#00ff00")
+            ->email("gilles.champagne@cll.qc.ca")
+            ->firstName("Gilles")
+            ->lastName("Champagne")
+            ->image(file_get_contents("usagers_images/crayon.png"))
+            ->build();
+
+        $josee = (new EmployeBuilder())
+            ->username("lainessej")
+            ->password("admin#123")
+            ->color("#0000ff")
+            ->email("josee.lainesse@cll.qc.ca")
+            ->firstName("Josée")
+            ->lastName("Lainesse")
+            ->image(file_get_contents("usagers_images/bebe.png"))
+            ->build();
+
+        $marc = (new EmployeBuilder())
+            ->username("deslandesm")
+            ->password("admin#123")
+            ->color("#ffffff")
+            ->email("marc.deslandes@cll.qc.ca")
+            ->firstName("Marc")
+            ->lastName("Deslandes")
+            ->image(file_get_contents("usagers_images/fleur.png"))
+            ->build();
+
+        $lise = (new EmployeBuilder())
+            ->username("provencherl")
+            ->password("admin#123")
+            ->color("#000000")
+            ->email("lise.provencher@cll.qc.ca")
+            ->firstName("Lise")
+            ->lastName("Provencher")
+            ->image(file_get_contents("usagers_images/tada.png"))
+            ->build();
+
+        $serge = (new EmployeBuilder())
+            ->username("levesques")
+            ->password("admin#123")
+            ->color("#ff0000")
+            ->email("serge.levesque@cll.qc.ca")
+            ->firstName("Serge")
+            ->lastName("Lévesque")
+            ->image(file_get_contents("usagers_images/vantard.png"))
+            ->build();
+
+        $employeDao->insert($admin);
+        $employeDao->insert($olivier);
+        $employeDao->insert($guillaume);
+        $employeDao->insert($melissa);
+        $employeDao->insert($gilles);
+        $employeDao->insert($josee);
+        $employeDao->insert($marc);
+        $employeDao->insert($lise);
+        $employeDao->insert($serge);
     }
 }
