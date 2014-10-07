@@ -114,7 +114,11 @@ if (estRetourFormulaire()) {
                         jQuery(function ($) {
                             $('#image').val("");
                         });
-                        window.alert('Image trop petite. Elle doit être au moins de 300x400 px');
+                        swal({
+                            title: "Erreur",
+                            text: 'Image trop petite. Elle doit être au moins de 300x400 px',
+                            type: "error"
+                        });
                     } else {
                         jcrop_api.enable();
                         jcrop_api.setImage(this.src);

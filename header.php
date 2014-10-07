@@ -14,10 +14,12 @@
 
     <link href="css/style.css" rel="stylesheet">
     <link href="css/jquery.Jcrop.css" rel="stylesheet">
+    <link href="css/sweet-alert.css" rel="stylesheet">
 
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery.Jcrop.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/sweet-alert.min.js"></script>
 
     <script type="text/javascript">
         var jcrop_api;

@@ -47,8 +47,7 @@
 
                 echo "<td><a href='#'>Modifier</a></td>";
 
-                echo "<td><a href='admin-supprimer.php?id=" . $user['id']
-                    . "' onclick=\"return confirm('Êtes vous sûr de vouloir supprimer l\'utilisateur?')\">Supprimer</a></td>";
+                echo "<td><a href='#' onclick=\"sweetConfirmDelete(" . $user['id'] . ");\">Supprimer</a></td>";
 
                 echo "</tr>";
             }
@@ -61,5 +60,19 @@
     </div>
 
 </div>
-
+<script language="JavaScript">
+    function sweetConfirmDelete(id) {
+        swal({
+                title: "Suppression",
+                text: "Êtes-vous sûr de vouloir supprimer cet usager?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#DD6B55',
+                confirmButtonText: 'Supprimer'
+            },
+            function(){
+                window.location.href="admin-supprimer.php?id=" + id;
+            });
+    }
+</script>
 <?php include "footer.php"; ?>
