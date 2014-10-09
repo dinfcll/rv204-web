@@ -1,6 +1,7 @@
 <?php
 
 include 'employedao.class.php';
+include 'constants.php';
 
 class AccesBD
 {
@@ -9,7 +10,7 @@ class AccesBD
     public function __construct()
     {
         try {
-            $this->pdo = new PDO('sqlite:' . dirname(__FILE__) . '/database.sqlite');
+            $this->pdo = new PDO('sqlite:' . dirname(__FILE__) . BD_PATH);
             $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (Exception $e) {
