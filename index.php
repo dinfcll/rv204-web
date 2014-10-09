@@ -41,11 +41,13 @@ if(isset($_POST['nom_utilisateur'])) {
 
 <div class="container">
     <form class="form-signin" action="index.php" method="post">
-        <?php
-            if(isset($message)) {
-                echo $message;
-            }
-        ?>
+        <div id="message">
+            <?php
+                if(isset($message)) {
+                    echo $message;
+                }
+            ?>
+        </div>
         <h2 class="form-signin-heading">RV204</h2>
         <input type="text" name="nom_utilisateur" class="form-control" placeholder="Nom d'utilisateur" required autofocus>
         <input type="password" name="password" class="form-control" placeholder="Mot de passe" required>

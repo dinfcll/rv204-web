@@ -27,7 +27,9 @@ include "header.php";
 
 <div class="container">
     <div class="page-header">
-        <?php echo $message ?>
+        <div id="message">
+            <?php echo $message ?>
+        </div>
         <h1><?php echo $utilisateur['firstName'] ?> (<?php echo $utilisateur['username'] ?>)</h1>
     </div>
 

@@ -12,11 +12,13 @@ if (estRetourFormulaire()) {
 
 <div class="container">
     <div class="page-header">
-        <?php
-        if (isset($message)) {
-            echo $message;
-        }
-        ?>
+        <div id="message">
+            <?php
+            if (isset($message)) {
+                echo $message;
+            }
+            ?>
+        </div>
         <h1>Créer un nouvel utilisateur</h1>
     </div>
 

@@ -44,7 +44,7 @@ function maj($utilisateur, $monacces)
 
     $image = $utilisateur['image'];
 
-    if($_FILES['image']['error'] > 0) {
+    if($_FILES['image']['error'] == 1) {
         return messageErreur("L'image est trop pesante. Quelque chose de moins lourd, peut-être?");
     }
 
@@ -111,17 +111,21 @@ function insererUtilisateur($retourFormulaire, $monacces)
 
 function messageErreur($message)
 {
-    return "<div class=\"alert alert-danger\">" . $message . "</div>";
+    return message($message, "danger");
 }
 
 function messageSucces($message)
 {
-    return "<div class=\"alert alert-success\">" . $message . "</div>";
+    return message($message, "success");
 }
 
 function messageInfo($message)
 {
-    return "<div class=\"alert alert-info\">" . $message . "</div>";
+    return message($message, "info");
+}
+
+function message($message, $class) {
+    return "<div class=\"alert alert-". $class ."\">" . $message . "</div>";
 }
 
 function cropImage($uploadfile, $uploaddir, $type)
