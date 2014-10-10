@@ -4,7 +4,6 @@ include "info-helper.php";
 
 session_start();
 
-$utilisateur = "";
 $message = "";
 $employeCourant = (new EmployeBuilder())->build();
 

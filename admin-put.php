@@ -1,12 +1,17 @@
 <?php
 
-include "admin-header.php";
+include "admin-verification.php";
 include "header.php";
 
 $message = "";
+$employeCourant = (new EmployeBuilder())->build();
 
 if (estRetourFormulaire()) {
-    $message = insererUtilisateur($_POST, $monacces);
+    $message = putUser($_POST);
+}
+
+if(isset($_GET['id'])) {
+    $employeCourant = (new EmployeDao())->getById($_GET['id']);
 }
 
 ?>
@@ -20,30 +25,40 @@ if (estRetourFormulaire()) {
             }
             ?>
         </div>
-        <h1>Créer un nouvel utilisateur</h1>
+        <?php
+            if(isset($_GET['id'])) {
+                echo "<h1>Modifier un utilisateur</h1>";
+            } else {
+                echo "<h1>Créer un nouvel utilisateur</h1>";
+            }
+        ?>
     </div>
 
-    <form method="post" action="admin-nouveau.php" enctype="multipart/form-data">
+    <form method="post" action="admin-put.php<?php if(isset($_GET['id'])){ echo "?id=" . $_GET['id']; } ?>" enctype="multipart/form-data">
+        <?php if(isset($_GET['id'])){
+            echo "<input type=\"hidden\" id=\"id\" name=\"id\" value=\"" . $_GET['id'] . "\"/>";
+        } ?>
+
         <label>
             Prénom : <input type="text" name="prenom" id="prenom" placeholder="(ex : Olivier)"
-                            onkeyup="proposeCourriel()">
+                            onkeyup="proposeCourriel()" value="<?php echo $employeCourant->getFirstName(); ?>">
         </label><br>
 
         <label>
             Nom : <input type="text" name="nomfamille" id="nomfamille" placeholder="(ex : Lafleur)"
-                         onkeyup="proposeCourriel()">
+                         onkeyup="proposeCourriel()" value="<?php echo $employeCourant->getLastName(); ?>">
         </label><br>
 
         <label>
-            Nom d'utilisateur : <input type="text" name="username" placeholder="(ex : lafleuro)">
+            Nom d'utilisateur : <input type="text" name="username" placeholder="(ex : lafleuro)" value="<?php echo $employeCourant->getUsername(); ?>">
         </label><br>
 
         <label>
-            Courriel : <input type="email" name="email" id="email" placeholder="(ex: admin@admin.com)">
+            Courriel : <input type="email" name="email" id="email" placeholder="(ex: admin@admin.com)" value="<?php echo $employeCourant->getEmail(); ?>">
         </label><br>
 
         <label>
-            Couleur : <input type="color" name="couleur">
+            Couleur : <input type="color" name="couleur" value="<?php echo $employeCourant->getColor(); ?>">
         </label><br>
 
         <label>
@@ -52,7 +67,13 @@ if (estRetourFormulaire()) {
 
             <div id="image-explication"></div>
             <div id="image-container">
-                <img src="" width="300px" height="400px" id="target"><br>
+                <?php
+                if ($employeCourant->getImage() != "") {
+                    echo '<img src="image.php?id=' . $employeCourant->getId() . '" width="300px" id="target"><br>';
+                } else {
+                    echo '<img src="" width="300px" height="400px" id="target"><br>';
+                }
+                ?>
             </div>
             <input type="hidden" id="x" name="x"/>
             <input type="hidden" id="y" name="y"/>
@@ -61,14 +82,14 @@ if (estRetourFormulaire()) {
         </label><br>
 
         <label>
-            Mot de passe : <input type="password" name="password1">
+            Mot de passe : <input type="password" name="password1" value="<?php echo $employeCourant->getPassword(); ?>">
         </label><br>
         <label>
-            Entrez de nouveau : <input type="password" name="password2">
+            Entrez de nouveau : <input type="password" name="password2" value="<?php echo $employeCourant->getPassword(); ?>">
         </label><br>
 
         <label>
-            Droits d'administrateur : <input type="checkbox" name="admin">
+            Droits d'administrateur : <input type="checkbox" id="admin" name="admin" <?php if($employeCourant->isAdmin()) {echo "checked";} ?>>
         </label><br>
 
         <button type="submit" class="btn btn-primary">Créer</button>

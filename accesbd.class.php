@@ -1,7 +1,7 @@
 <?php
 
 include 'employedao.class.php';
-include 'constants.php';
+include_once('constants.php');
 
 class AccesBD
 {
@@ -40,6 +40,7 @@ class AccesBD
 
     public function utilisateurValide($username, $password)
     {
+
         return $this->employeDao->getByUsername($username)->getPassword() === $password;
     }
 
@@ -159,13 +160,13 @@ class AccesBD
             ->build();
 
         $this->employeDao->insert($admin);
-        $this->employeDao->insert($olivier);
-        $this->employeDao->insert($guillaume);
-        $this->employeDao->insert($melissa);
-        $this->employeDao->insert($gilles);
-        $this->employeDao->insert($josee);
-        $this->employeDao->insert($marc);
-        $this->employeDao->insert($lise);
-        $this->employeDao->insert($serge);
+        $this->employeDao->put($olivier);
+        $this->employeDao->put($guillaume);
+        $this->employeDao->put($melissa);
+        $this->employeDao->put($gilles);
+        $this->employeDao->put($josee);
+        $this->employeDao->put($marc);
+        $this->employeDao->put($lise);
+        $this->employeDao->put($serge);
     }
 }

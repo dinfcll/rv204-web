@@ -1,6 +1,7 @@
 <?php
 
 include "employe.class.php";
+include_once('constants.php');
 
 class EmployeDao
 {
@@ -9,7 +10,7 @@ class EmployeDao
     public function __construct()
     {
         try {
-            $this->pdo = new PDO('sqlite:' . dirname(__FILE__) . '/database.sqlite');
+            $this->pdo = new PDO('sqlite:' . dirname(__FILE__) . BD_PATH);
             $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (Exception $e) {
@@ -32,6 +33,15 @@ class EmployeDao
         return $stmt->fetchAll();
     }
 
+    public function put(Employe $employe)
+    {
+        if($employe->getId() != null) {
+            $this->update($employe);
+        } else {
+            $this->insert($employe);
+        }
+    }
+
     public function insert(Employe $employe)
     {
         $stmt = $this->pdo->prepare("INSERT INTO users (firstName, lastName, username, password, color, isAdmin, email, image, id)
@@ -50,7 +60,7 @@ class EmployeDao
         $stmt->execute();
     }
 
-    public function update(Employe $employe)
+    private function update(Employe $employe)
     {
         $stmt = $this->pdo->prepare("UPDATE users
                                      SET firstName='" . $employe->getFirstName() . "',
@@ -73,7 +83,11 @@ class EmployeDao
 
         $result = $stmt->fetchAll();
 
-        return $this->convertDbToEmploye($result[0]);
+        if(sizeof($result) > 0) {
+            return $this->convertDbToEmploye($result[0]);
+        } else {
+            return (new EmployeBuilder)->build();
+        }
     }
 
     public function getByUsername($username)
@@ -83,7 +97,11 @@ class EmployeDao
 
         $result = $stmt->fetchAll();
 
-        return $this->convertDbToEmploye($result[0]);
+        if(sizeof($result) > 0) {
+            return $this->convertDbToEmploye($result[0]);
+        } else {
+            return (new EmployeBuilder)->build();
+        }
     }
 
     private function convertDbToEmploye($donnees) {

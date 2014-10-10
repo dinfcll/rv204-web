@@ -1,6 +1,6 @@
 <?php
 
-include "admin-header.php";
+include "admin-verification.php";
 include "header.php";
 
 ?>
@@ -52,7 +52,7 @@ include "header.php";
                     echo "<td>Non</td>";
                 }
 
-                echo "<td><a href='#'>Modifier</a></td>";
+                echo "<td><a href='admin-put.php?id=" . $user['id'] . "'>Modifier</a></td>";
 
                 echo "<td><a href='#' onclick=\"sweetConfirmDelete(" . $user['id'] . ");\">Supprimer</a></td>";
 
@@ -62,7 +62,7 @@ include "header.php";
             </tbody>
         </table>
 
-        <a href="admin-nouveau.php">Nouvel utilisateur</a>
+        <a href="admin-put.php">Nouvel utilisateur</a>
 
     </div>
 

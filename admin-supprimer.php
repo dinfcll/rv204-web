@@ -1,7 +1,7 @@
 <?php
 
-include "admin-header.php" ;
+include "admin-verification.php";
 
-$employeDao->deleteById($_GET['id']);
+(new EmployeDao())->deleteById($_GET['id']);
 
 header('Location: admin.php');

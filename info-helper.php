@@ -61,13 +61,16 @@ function maj(Employe $employeCourant)
     $employeCourant->setImage($image);
     $employeCourant->setEmail($_POST['email']);
 
-    (new EmployeDao())->update($employeCourant);
+    (new EmployeDao())->put($employeCourant);
 
     return messageSucces("Votre compte a bien été mis à jour");
 }
 
-function insererUtilisateur($retourFormulaire)
+function putUser($retourFormulaire)
 {
+    $image = "";
+    $id = null;
+
     if ($retourFormulaire['prenom'] != "" and $retourFormulaire['nomfamille'] != "") {
         $prenom = $retourFormulaire['prenom'];
         $nomfamille = $retourFormulaire['nomfamille'];
@@ -99,7 +102,13 @@ function insererUtilisateur($retourFormulaire)
         $isAdmin = 0;
     }
 
-    $image = "";
+    $employeDao = new EmployeDao();
+
+    if(isset($retourFormulaire['id'])) {
+        $id = $retourFormulaire['id'];
+
+        $image = $employeDao->getById($retourFormulaire['id'])->getImage();
+    }
 
     if ($_FILES['image']['size'] > 0) {
         $image = retourneImage();
@@ -109,9 +118,7 @@ function insererUtilisateur($retourFormulaire)
         }
     }
 
-    $employeDao = new EmployeDao();
-
-    $employeDao->insert((new EmployeBuilder())
+    $employeDao->put((new EmployeBuilder())
         ->firstName($prenom)
         ->lastName($nomfamille)
         ->username($username)
@@ -120,9 +127,10 @@ function insererUtilisateur($retourFormulaire)
         ->email($retourFormulaire['email'])
         ->isAdmin($isAdmin)
         ->image($image)
+        ->id($id)
         ->build());
 
-    return messageSucces("Le compte a bien été créé");
+    return messageSucces("L'opération a été effectuée avec succès.");
 }
 
 function messageErreur($message)
