@@ -1,6 +1,7 @@
 <?php
 
 include "admin-header.php";
+include "header.php";
 
 $message = "";
 

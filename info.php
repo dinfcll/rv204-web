@@ -6,15 +6,17 @@ session_start();
 
 $utilisateur = "";
 $message = "";
-$monacces = new AccesBD();
+$employeCourant = (new EmployeBuilder())->build();
 
 if (utilisateurConnecte()) {
-    $utilisateur = $monacces->recupererUtilisateur($_SESSION['nom_utilisateur']);
+    $employeDao = new EmployeDao();
+
+    $employeCourant = $employeDao->getByUsername($_SESSION['nom_utilisateur']);
 
     if (estRetourFormulaire()) {
-        $message = maj($utilisateur, $monacces);
+        $message = maj($employeCourant);
 
-        $utilisateur = $monacces->recupererUtilisateur($_SESSION['nom_utilisateur']);
+        $employeCourant = $employeDao->getByUsername($_SESSION['nom_utilisateur']);
     }
 
 } else {
@@ -30,15 +32,15 @@ include "header.php";
         <div id="message">
             <?php echo $message ?>
         </div>
-        <h1><?php echo $utilisateur['firstName'] ?> (<?php echo $utilisateur['username'] ?>)</h1>
+        <h1><?php echo $employeCourant->getFirstName(); ?> (<?php echo $employeCourant->getUsername(); ?>)</h1>
     </div>
 
     <form method="post" action="info.php" enctype="multipart/form-data">
         <h3>Votre couleur</h3>
-        <input type="color" name="couleurpreferee" value="<?php echo $utilisateur['color'] ?>">
+        <input type="color" name="couleurpreferee" value="<?php echo $employeCourant->getColor() ?>">
 
         <h3>Votre courriel</h3>
-        <input type="email" name="email" value="<?php echo $utilisateur['email'] ?>">
+        <input type="email" name="email" value="<?php echo $employeCourant->getEmail() ?>">
 
         <h3>Votre image</h3>
         <input type="hidden" name="MAX_FILE_SIZE" value="5000000"/>
@@ -46,8 +48,8 @@ include "header.php";
         <div id="image-explication"></div>
         <div id="image-container">
             <?php
-                if ($utilisateur['image'] != "") {
-                    echo '<img src="image.php?id=' . $utilisateur['id'] . '" width="300px" id="target"><br>';
+                if ($employeCourant->getImage() != "") {
+                    echo '<img src="image.php?id=' . $employeCourant->getId() . '" width="300px" id="target"><br>';
                 } else {
                     echo '<img src="" width="300px" height="400px" id="target"><br>';
                 }

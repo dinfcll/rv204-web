@@ -6,6 +6,7 @@ include 'constants.php';
 class AccesBD
 {
     private $pdo;
+    private $employeDao;
 
     public function __construct()
     {
@@ -17,6 +18,8 @@ class AccesBD
             echo "Impossible d'accéder à la base de données SQLite : " . $e->getMessage();
             die();
         }
+
+        $this->employeDao = new EmployeDao();
     }
 
     public function creerTableEmployes()
@@ -35,55 +38,9 @@ class AccesBD
                           ");
     }
 
-    public function insererEmploye($id, $firstName, $lastName, $username, $password, $color, $email, $isAdmin = 0, $image = "")
-    {
-        $stmt = $this->pdo->prepare("INSERT INTO users (firstName, lastName, username, password, color, isAdmin, email, image, id)
-                                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
-        $stmt->bindValue(1, $firstName);
-        $stmt->bindValue(2, $lastName);
-        $stmt->bindValue(3, $username);
-        $stmt->bindValue(4, $password);
-        $stmt->bindValue(5, $color);
-        $stmt->bindValue(6, $isAdmin);
-        $stmt->bindValue(7, $email);
-        $stmt->bindValue(8, $image, PDO::PARAM_LOB);
-        $stmt->bindValue(9, $id);
-
-        $stmt->execute();
-    }
-
-    public function majEmploye($id, $password, $color, $image, $isAdmin, $email)
-    {
-        $stmt = $this->pdo->prepare("UPDATE users
-                                     SET password='".$password."',
-                                         isAdmin=".$isAdmin.",
-                                         color='".$color."',
-                                         email='".$email."',
-                                         image=?
-                                     WHERE id=".$id);
-        $stmt->bindValue(1, $image, PDO::PARAM_LOB);
-        $stmt->execute();
-    }
-
-    public function recupererIdUtilisateur($username)
-    {
-        return $this->recupererUtilisateur($username)["id"];
-    }
-
     public function utilisateurValide($username, $password)
     {
-        return $this->recupererUtilisateur($username)['password'] === $password;
-    }
-
-    public function recupererUtilisateur($username)
-    {
-        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE username = '" . $username . "'");
-        $stmt->execute();
-
-        $result = $stmt->fetchAll();
-
-        return $result[0];
+        return $this->employeDao->getByUsername($username)['password'] === $password;
     }
 
     public function genererImage($id) {
@@ -103,19 +60,6 @@ class AccesBD
         }
 
         return false;
-    }
-
-    public function recupererTousUtilisateurs()
-    {
-        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE id > 0");
-        $stmt->execute();
-
-        return $stmt->fetchAll();
-    }
-
-    public function supprimerUsager($id) {
-        $this->pdo->query("DELETE FROM users
-                           WHERE id=".$id);
     }
 
     public function supprimerTable()

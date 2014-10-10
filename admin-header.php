@@ -4,18 +4,17 @@ include "info-helper.php";
 
 session_start();
 
-$utilisateur = "";
-$monacces = new AccesBD();
+$employeCourant = (new EmployeBuilder())->build();
 
 if (utilisateurConnecte()) {
-    $utilisateur = $monacces->recupererUtilisateur($_SESSION['nom_utilisateur']);
+    $employeDao = new EmployeDao();
 
-    if ($utilisateur['isAdmin'] == 0) {
+    $employeCourant = $employeDao->getByUsername($_SESSION['nom_utilisateur']);
+
+    if ($employeCourant->isAdmin() == 0) {
         header('Location: info.php');
     }
 
 } else {
     header('Location: index.php');
 }
-
-include "header.php";

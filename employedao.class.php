@@ -73,7 +73,7 @@ class EmployeDao
 
         $result = $stmt->fetchAll();
 
-        return $result[0];
+        return $this->convertDbToEmploye($result[0]);
     }
 
     public function getByUsername($username)
@@ -83,6 +83,22 @@ class EmployeDao
 
         $result = $stmt->fetchAll();
 
-        return $result[0];
+        return $this->convertDbToEmploye($result[0]);
+    }
+
+    private function convertDbToEmploye($donnees) {
+        $employe = (new EmployeBuilder())
+            ->id($donnees['id'])
+            ->username($donnees['username'])
+            ->password($donnees['password'])
+            ->color($donnees['color'])
+            ->email($donnees['email'])
+            ->firstName($donnees['firstName'])
+            ->lastName($donnees['lastName'])
+            ->isAdmin($donnees['isAdmin'])
+            ->image($donnees['image'])
+            ->build();
+
+        return $employe;
     }
 } 

@@ -2,6 +2,6 @@
 
 include "admin-header.php" ;
 
-$monacces->supprimerUsager($_GET['id']);
+$employeDao->deleteById($_GET['id']);
 
 header('Location: admin.php');

@@ -1,4 +1,9 @@
-<?php include "admin-header.php"; ?>
+<?php
+
+include "admin-header.php";
+include "header.php";
+
+?>
 
 <div class="container">
     <div class="page-header">
@@ -27,7 +32,7 @@
             </thead>
             <tbody>
             <?php
-            $users = $monacces->recupererTousUtilisateurs();
+            $users = (new EmployeDao())->getAll();
             foreach ($users as $user) {
                 echo "<tr>";
                 echo "<td>" . $user['id'] . "</td>";

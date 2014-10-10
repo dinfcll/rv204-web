@@ -185,5 +185,48 @@ class Employe {
         return $this->username;
     }
 
+    public function setColor($color)
+    {
+        $this->color = $color;
+    }
 
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    public function setIsAdmin($isAdmin)
+    {
+        $this->isAdmin = $isAdmin;
+    }
+
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
 } 

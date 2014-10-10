@@ -29,10 +29,10 @@ function retourneImage()
     }
 }
 
-function maj($utilisateur, $monacces)
+function maj(Employe $employeCourant)
 {
     $couleur = $_POST['couleurpreferee'];
-    $password = $utilisateur['password'];
+    $password = $employeCourant->getPassword();
 
     if ($_POST['password1'] != "") {
         if ($_POST['password1'] == $_POST['password2']) {
@@ -42,7 +42,7 @@ function maj($utilisateur, $monacces)
         }
     }
 
-    $image = $utilisateur['image'];
+    $image = $employeCourant->getImage();
 
     if($_FILES['image']['error'] == 1) {
         return messageErreur("L'image est trop pesante. Quelque chose de moins lourd, peut-être?");
@@ -56,12 +56,19 @@ function maj($utilisateur, $monacces)
         }
     }
 
-    $monacces->majEmploye($utilisateur['id'], $password, $couleur, $image, $utilisateur['isAdmin'], $_POST['email']);
+    $employeCourant->setPassword($password);
+    $employeCourant->setColor($couleur);
+    $employeCourant->setImage($image);
+    $employeCourant->setEmail($_POST['email']);
+
+    $employeDao = new EmployeDao();
+
+    $employeDao->update($employeCourant);
 
     return messageSucces("Votre compte a bien été mis à jour");
 }
 
-function insererUtilisateur($retourFormulaire, $monacces)
+function insererUtilisateur($retourFormulaire)
 {
     if ($retourFormulaire['prenom'] != "" and $retourFormulaire['nomfamille'] != "") {
         $prenom = $retourFormulaire['prenom'];
@@ -104,7 +111,18 @@ function insererUtilisateur($retourFormulaire, $monacces)
         }
     }
 
-    $monacces->insererEmploye(null, $prenom, $nomfamille, $username, $password, $couleur, $retourFormulaire['email'], $isAdmin, $image);
+    $employeDao = new EmployeDao();
+
+    $employeDao->insert((new EmployeBuilder())
+        ->firstName($prenom)
+        ->lastName($nomfamille)
+        ->username($username)
+        ->password($password)
+        ->color($couleur)
+        ->email($retourFormulaire['email'])
+        ->isAdmin($isAdmin)
+        ->image($image)
+        ->build());
 
     return messageSucces("Le compte a bien été créé");
 }

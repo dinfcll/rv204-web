@@ -63,7 +63,7 @@
         </div>
         <div class="collapse navbar-collapse">
             <?php
-                if ($utilisateur['isAdmin'] != 0) {
+                if ($employeCourant->isAdmin() != 0) {
                     echo '<ul class="nav navbar-nav">
                               <li><a href="admin.php">Admin</a></li>
                           </ul>';
