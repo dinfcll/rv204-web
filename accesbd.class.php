@@ -40,7 +40,7 @@ class AccesBD
 
     public function utilisateurValide($username, $password)
     {
-        return $this->employeDao->getByUsername($username)['password'] === $password;
+        return $this->employeDao->getByUsername($username)->getPassword() === $password;
     }
 
     public function genererImage($id) {
