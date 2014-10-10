@@ -61,9 +61,7 @@ function maj(Employe $employeCourant)
     $employeCourant->setImage($image);
     $employeCourant->setEmail($_POST['email']);
 
-    $employeDao = new EmployeDao();
-
-    $employeDao->update($employeCourant);
+    (new EmployeDao())->update($employeCourant);
 
     return messageSucces("Votre compte a bien été mis à jour");
 }

@@ -69,8 +69,6 @@ class AccesBD
 
     public function creerUsagersStandards()
     {
-        $employeDao = new EmployeDao();
-
         $admin = (new EmployeBuilder())
             ->id(0)
             ->username("admin")
@@ -160,14 +158,14 @@ class AccesBD
             ->image(file_get_contents("usagers_images/vantard.png"))
             ->build();
 
-        $employeDao->insert($admin);
-        $employeDao->insert($olivier);
-        $employeDao->insert($guillaume);
-        $employeDao->insert($melissa);
-        $employeDao->insert($gilles);
-        $employeDao->insert($josee);
-        $employeDao->insert($marc);
-        $employeDao->insert($lise);
-        $employeDao->insert($serge);
+        $this->employeDao->insert($admin);
+        $this->employeDao->insert($olivier);
+        $this->employeDao->insert($guillaume);
+        $this->employeDao->insert($melissa);
+        $this->employeDao->insert($gilles);
+        $this->employeDao->insert($josee);
+        $this->employeDao->insert($marc);
+        $this->employeDao->insert($lise);
+        $this->employeDao->insert($serge);
     }
 }

@@ -7,9 +7,7 @@ session_start();
 $employeCourant = (new EmployeBuilder())->build();
 
 if (utilisateurConnecte()) {
-    $employeDao = new EmployeDao();
-
-    $employeCourant = $employeDao->getByUsername($_SESSION['nom_utilisateur']);
+    $employeCourant = (new EmployeDao())->getByUsername($_SESSION['nom_utilisateur']);
 
     if ($employeCourant->isAdmin() == 0) {
         header('Location: info.php');
