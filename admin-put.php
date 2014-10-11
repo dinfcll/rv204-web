@@ -64,7 +64,7 @@ if(isset($_GET['id'])) {
         <label>
             Image : <input type="hidden" name="MAX_FILE_SIZE" value="5000000"/>
             <input type="file" name="image" accept="image/*" id="image"><br>
-
+        </label><br>
             <div id="image-explication"></div>
             <div id="image-container">
                 <?php
@@ -79,7 +79,7 @@ if(isset($_GET['id'])) {
             <input type="hidden" id="y" name="y"/>
             <input type="hidden" id="w" name="w"/>
             <input type="hidden" id="h" name="h"/>
-        </label><br>
+
 
         <label>
             Mot de passe : <input type="password" name="password1" value="<?php echo $employeCourant->getPassword(); ?>">
