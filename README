@@ -1,0 +1,4 @@
+Application web qui permet aux usagers de l'application RV204 de configurer 
+leurs paramêtres.
+
+Requis sur votre serveur : PHP et les modules SQLite et GD.
