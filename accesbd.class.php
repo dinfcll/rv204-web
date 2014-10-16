@@ -38,10 +38,11 @@ class AccesBD
                           ");
     }
 
-    public function utilisateurValide($username, $password)
+    public function utilisateurValide($username, $enteredPassword)
     {
+        $storedPassword = $this->employeDao->getByUsername($username)->getPassword();
 
-        return $this->employeDao->getByUsername($username)->getPassword() === $password;
+        return password_verify($enteredPassword, $storedPassword);
     }
 
     public function genererImage($id) {
@@ -73,13 +74,13 @@ class AccesBD
         $admin = (new EmployeBuilder())
             ->id(0)
             ->username("admin")
-            ->password("admin#123")
+            ->password(password_hash("admin#123", PASSWORD_DEFAULT))
             ->isAdmin(true)
             ->build();
 
         $olivier = (new EmployeBuilder())
             ->username("lafleuro")
-            ->password("admin#123")
+            ->password(password_hash("admin#123", PASSWORD_DEFAULT))
             ->color("#ffff00")
             ->email("olivier.lafleur@cll.qc.ca")
             ->firstName("Olivier")
@@ -90,7 +91,7 @@ class AccesBD
 
         $guillaume = (new EmployeBuilder())
             ->username("michaudg")
-            ->password("admin#123")
+            ->password(password_hash("admin#123", PASSWORD_DEFAULT))
             ->color("#ff00ff")
             ->email("michaudg@cll.qc.ca")
             ->firstName("Guillaume")
@@ -101,7 +102,7 @@ class AccesBD
 
         $melissa = (new EmployeBuilder())
             ->username("clermontm")
-            ->password("admin#123")
+            ->password(password_hash("admin#123", PASSWORD_DEFAULT))
             ->color("#00ffff")
             ->email("melissa.clermont@cll.qc.ca")
             ->firstName("Mélissa")
@@ -111,7 +112,7 @@ class AccesBD
 
         $gilles = (new EmployeBuilder())
             ->username("champagneg")
-            ->password("admin#123")
+            ->password(password_hash("admin#123", PASSWORD_DEFAULT))
             ->color("#00ff00")
             ->email("gilles.champagne@cll.qc.ca")
             ->firstName("Gilles")
@@ -121,7 +122,7 @@ class AccesBD
 
         $josee = (new EmployeBuilder())
             ->username("lainessej")
-            ->password("admin#123")
+            ->password(password_hash("admin#123", PASSWORD_DEFAULT))
             ->color("#0000ff")
             ->email("josee.lainesse@cll.qc.ca")
             ->firstName("Josée")
@@ -131,7 +132,7 @@ class AccesBD
 
         $marc = (new EmployeBuilder())
             ->username("deslandesm")
-            ->password("admin#123")
+            ->password(password_hash("admin#123", PASSWORD_DEFAULT))
             ->color("#ffffff")
             ->email("marc.deslandes@cll.qc.ca")
             ->firstName("Marc")
@@ -141,7 +142,7 @@ class AccesBD
 
         $lise = (new EmployeBuilder())
             ->username("provencherl")
-            ->password("admin#123")
+            ->password(password_hash("admin#123", PASSWORD_DEFAULT))
             ->color("#000000")
             ->email("lise.provencher@cll.qc.ca")
             ->firstName("Lise")
@@ -151,7 +152,7 @@ class AccesBD
 
         $serge = (new EmployeBuilder())
             ->username("levesques")
-            ->password("admin#123")
+            ->password(password_hash("admin#123", PASSWORD_DEFAULT))
             ->color("#ff0000")
             ->email("serge.levesque@cll.qc.ca")
             ->firstName("Serge")

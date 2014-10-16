@@ -36,7 +36,7 @@ function maj(Employe $employeCourant)
 
     if ($_POST['password1'] != "") {
         if ($_POST['password1'] == $_POST['password2']) {
-            $password = $_POST['password1'];
+            $password = password_hash($_POST['password1'], PASSWORD_DEFAULT);
         } else {
             return messageErreur("Les mots de passe sont différents");
         }
@@ -66,7 +66,7 @@ function maj(Employe $employeCourant)
     return messageSucces("Votre compte a bien été mis à jour");
 }
 
-function putUser($retourFormulaire)
+function putUser(Employe $employeCourant, $retourFormulaire)
 {
     $image = "";
     $id = null;
@@ -84,14 +84,14 @@ function putUser($retourFormulaire)
         return messageErreur("Vous devez entrer un nom d'utilisateur");
     }
 
-    if ($retourFormulaire['password1'] == $retourFormulaire['password2']) {
-        $password = $retourFormulaire['password1'];
-    } else {
-        return messageErreur("Les mots de passe sont différents");
-    }
-
     if ($retourFormulaire['password1'] == "") {
-        return messageErreur("Vous devez entrer un mot de passe");
+        $password = $employeCourant->getPassword();
+    } else {
+        if ($retourFormulaire['password1'] == $retourFormulaire['password2']) {
+            $password = password_hash($retourFormulaire['password1'], PASSWORD_DEFAULT);
+        } else {
+            return messageErreur("Les mots de passe sont différents");
+        }
     }
 
     $couleur = $retourFormulaire['couleur'];

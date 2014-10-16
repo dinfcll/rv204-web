@@ -6,12 +6,12 @@ include "header.php";
 $message = "";
 $employeCourant = (new EmployeBuilder())->build();
 
-if (estRetourFormulaire()) {
-    $message = putUser($_POST);
-}
-
 if(isset($_GET['id'])) {
     $employeCourant = (new EmployeDao())->getById($_GET['id']);
+}
+
+if (estRetourFormulaire()) {
+    $message = putUser($employeCourant, $_POST);
 }
 
 ?>
@@ -82,10 +82,10 @@ if(isset($_GET['id'])) {
 
 
         <label>
-            Mot de passe : <input type="password" name="password1" value="<?php echo $employeCourant->getPassword(); ?>">
+            Mot de passe : <input type="password" name="password1">
         </label><br>
         <label>
-            Entrez de nouveau : <input type="password" name="password2" value="<?php echo $employeCourant->getPassword(); ?>">
+            Entrez de nouveau : <input type="password" name="password2">
         </label><br>
 
         <label>
