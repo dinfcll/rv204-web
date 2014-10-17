@@ -25,7 +25,6 @@ include "header.php";
                 <th>Couleur</th>
                 <th>Image</th>
                 <th>Admin</th>
-                <!-- TODO : Modifier -->
                 <th>Modifier</th>
                 <th>Supprimer</th>
             </tr>
