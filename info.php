@@ -36,7 +36,7 @@ include "header.php";
 
     <form method="post" action="info.php" enctype="multipart/form-data">
         <h3>Votre couleur</h3>
-        <input type="color" name="couleurpreferee" value="<?php echo $employeCourant->getColor() ?>">
+        <input type="color" name="couleurpreferee" id="couleurpreferee" value="<?php echo $employeCourant->getColor() ?>">
 
         <h3>Votre courriel</h3>
         <input type="email" name="email" value="<?php echo $employeCourant->getEmail() ?>">
@@ -66,6 +66,15 @@ include "header.php";
         <label>
             Entrez de nouveau : <input type="password" name="password2">
         </label><br>
+
+        <h3>Raspberry Pi</h3>
+        <label>
+            Adresse : <input type="text" name="url" id="url" value="127.0.0.1"><br>
+        </label>
+        <label>
+            Port : <input type="text" name="port" id="port" value="9999"><br>
+        </label>
+        <button type="button" class="btn" onclick="connexion()">Tester la connexion</button><br><br>
 
         <button type="submit" class="btn btn-primary">Modifier</button>
     </form>
@@ -111,6 +120,37 @@ include "header.php";
     }
 
     document.getElementById('image').addEventListener('change', afficheImage, false);
+</script>
+
+<script language="JavaScript">
+    function connexion() {
+        var xmlhttp = new XMLHttpRequest();
+        var url = document.getElementById('url').value;
+        var port = document.getElementById('port').value;
+        var couleur = document.getElementById('couleurpreferee').value;
+
+        xmlhttp.onreadystatechange= function() {
+            if(xmlhttp.readyState == 4) {
+                if(xmlhttp.status == 200) {
+                    swal({
+                        title: "Succès",
+                        text: 'Votre couleur a bien été envoyée au Raspberry Pi',
+                        type: "success"
+                    });
+                } else {
+                    swal({
+                        title: "Erreur",
+                        text: 'Impossible de se connecter',
+                        type: "error"
+                    });
+                }
+            }
+        };
+
+        xmlhttp.open("POST", "socket-ressource.php", true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xmlhttp.send("color=" + couleur + "&url=" + url + ":" + port);
+    }
 </script>
 
 <?php include "footer.php"; ?>
