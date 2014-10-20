@@ -2,3 +2,27 @@ body {
     padding-top: 70px;
     padding-bottom: 30px;
 }
+
+.colorpicker-swatches {
+    width: 227px;
+    overflow: auto;
+    background-color: white;
+}
+
+.colorpicker-border {
+    border: 1px inset;
+    display: inline-block;
+}
+
+.colorpicker-swatch {
+    cursor: pointer;
+    float: left;
+    width: 45px;
+    height: 45px;
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+
+.selected {
+    border: 3px solid #000;
+}

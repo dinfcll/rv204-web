@@ -37,7 +37,7 @@ include "header.php";
 
     <form method="post" action="info.php" enctype="multipart/form-data">
         <h3>Votre couleur</h3>
-        <input type="color" name="couleurpreferee" id="couleurpreferee" value="<?php echo $employeCourant->getColor() ?>">
+        <?php include "colorpicker.php" ?>
 
         <h3>Votre courriel</h3>
         <input type="email" name="email" value="<?php echo $employeCourant->getEmail() ?>">
@@ -124,7 +124,7 @@ include "header.php";
 <script language="JavaScript">
     function connexion() {
         var xmlhttp = new XMLHttpRequest();
-        var couleur = document.getElementById('couleurpreferee').value;
+        var couleur = document.getElementById('couleur').value;
 
         <?php
             if($employeCourant->getRpiIpLastInteger() > 0) {

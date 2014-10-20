@@ -31,7 +31,7 @@ function retourneImage()
 
 function maj(Employe $employeCourant)
 {
-    $couleur = $_POST['couleurpreferee'];
+    $couleur = $_POST['couleur'];
     $password = $employeCourant->getPassword();
 
     if ($_POST['password1'] != "") {
