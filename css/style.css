@@ -26,3 +26,7 @@ body {
 .selected {
     border: 3px solid #000;
 }
+
+.alignright {
+    float: right;
+}

@@ -18,6 +18,7 @@ include_once "constants.php";
         <h1>Section Administrateur</h1>
 
         <em>N.B. Tous les Raspberry Pi utilisent le port <b><?php echo RPI_PORT ?></b> pour communiquer.</em>
+        <button class="btn btn-success alignright" onclick="window.location.href='admin-put.php'">Nouvel utilisateur</button><br><br>
 
         <table class="table">
             <thead>
@@ -58,17 +59,15 @@ include_once "constants.php";
                     echo "<td>Non</td>";
                 }
 
-                echo "<td><a href='admin-put.php?id=" . $user['id'] . "'>Modifier</a></td>";
+                echo "<td><button class='btn btn-warning' onclick='window.location.href=\"admin-put.php?id=" . $user['id'] . "\"'>Modifier</button></td>";
 
-                echo "<td><a href='#' onclick=\"sweetConfirmDelete(" . $user['id'] . ");\">Supprimer</a></td>";
+                echo "<td><button class='btn btn-danger' onclick=\"sweetConfirmDelete(" . $user['id'] . ");\">Supprimer</button></td>";
 
                 echo "</tr>";
             }
             ?>
             </tbody>
         </table>
-
-        <a href="admin-put.php">Nouvel utilisateur</a>
 
     </div>
 
