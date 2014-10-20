@@ -59,10 +59,6 @@ if (estRetourFormulaire()) {
         </label><br>
 
         <label>
-            Couleur :</label> <br><?php include "colorpicker.php" ?>
-        <br>
-
-        <label>
             Image : <input type="hidden" name="MAX_FILE_SIZE" value="5000000"/>
             <input type="file" name="image" accept="image/*" id="image"><br>
         </label><br>
@@ -97,6 +93,10 @@ if (estRetourFormulaire()) {
             Raspberry Pi (dernier chiffre de l'adresse IP. -1 lorsqu'il n'y en a pas) :
             <input type="text" id="rpiIpLastInteger" name="rpiIpLastInteger" value="<?php echo $employeCourant->getRpiIpLastInteger() ?>" size="3" maxlength="3">
         </label><br>
+
+        <label>
+            Couleur :</label> <br><?php include "colorpicker.php" ?>
+        <br>
 
         <button type="submit" class="btn btn-primary">Créer</button>
     </form>

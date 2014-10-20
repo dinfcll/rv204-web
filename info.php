@@ -36,9 +36,6 @@ include "header.php";
     </div>
 
     <form method="post" action="info.php" enctype="multipart/form-data">
-        <h3>Votre couleur</h3>
-        <?php include "colorpicker.php" ?>
-
         <h3>Votre courriel</h3>
         <input type="email" name="email" value="<?php echo $employeCourant->getEmail() ?>">
 
@@ -73,6 +70,10 @@ include "header.php";
                 echo '<h3>Raspberry Pi</h3>
                         <b>(Adresse : '. RPI_IP_BEGINNING_ADRESS . $employeCourant->getRpiIpLastInteger() . ":" . RPI_PORT .')</b><br>
                 <button type="button" class="btn" onclick="connexion()">Tester la connexion</button><br><br>';
+
+                echo '<h4>Votre couleur</h4>';
+                include "colorpicker.php";
+                echo '<br><br>';
             }
         ?>
         <button type="submit" class="btn btn-primary">Modifier</button>

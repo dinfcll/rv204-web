@@ -94,8 +94,6 @@ function putUser(Employe $employeCourant, $retourFormulaire)
         }
     }
 
-    $couleur = $retourFormulaire['couleur'];
-
     if (isset($retourFormulaire['admin'])) {
         $isAdmin = 1;
     } else {
@@ -120,6 +118,12 @@ function putUser(Employe $employeCourant, $retourFormulaire)
 
     if(!is_int(intval($retourFormulaire['rpiIpLastInteger']))) {
         return messageErreur("Adresse Raspberry Pi invalide");
+    } else {
+        if(isset($retourFormulaire['couleur'])  && $retourFormulaire['couleur'] != "") {
+            $couleur = $retourFormulaire['couleur'];
+        } else {
+            return messageErreur("Vous devez choisir une couleur");
+        }
     }
 
     $employeDao->put((new EmployeBuilder())

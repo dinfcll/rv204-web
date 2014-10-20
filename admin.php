@@ -17,13 +17,14 @@ include_once "constants.php";
         </div>
         <h1>Section Administrateur</h1>
 
+        <em>N.B. Tous les Raspberry Pi utilisent le port <b><?php echo RPI_PORT ?></b> pour communiquer.</em>
+
         <table class="table">
             <thead>
             <tr>
                 <th>#</th>
                 <th>Employé</th>
                 <th>Utilisateur</th>
-                <th>Couleur</th>
                 <th>Image</th>
                 <th>Admin</th>
                 <th>Modifier</th>
@@ -40,12 +41,11 @@ include_once "constants.php";
                     . "\">" . $user['email'] . "</a>";
 
                 if($user['rpiIpLastInteger'] > 0) {
-                    echo "<br><b>Raspberry Pi : " . RPI_IP_BEGINNING_ADRESS . $user['rpiIpLastInteger'] . ":" . RPI_PORT . "</b>";
+                    echo "<br><b>Raspberry Pi : " . RPI_IP_BEGINNING_ADRESS . $user['rpiIpLastInteger'] . "</b>";
                 }
 
                 echo "</td>";
                 echo "<td>" . $user['username'] . "</td>";
-                echo "<td bgcolor=" . $user['color'] . "></td>";
                 if ($user['image'] != "") {
                     echo "<td><a href='image.php?id=" . $user['id'] . "'><img src='image.php?id=" . $user['id']
                         . "' width=100px></a></td>";
