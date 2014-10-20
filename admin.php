@@ -23,9 +23,9 @@ include_once "constants.php";
             <thead>
             <tr>
                 <th>#</th>
+                <th>Image</th>
                 <th>Employé</th>
                 <th>Utilisateur</th>
-                <th>Image</th>
                 <th>Admin</th>
                 <th>Modifier</th>
                 <th>Supprimer</th>
@@ -37,6 +37,12 @@ include_once "constants.php";
             foreach ($users as $user) {
                 echo "<tr>";
                 echo "<td>" . $user['id'] . "</td>";
+                if ($user['image'] != "") {
+                    echo "<td><a href='image.php?id=" . $user['id'] . "'><img src='image.php?id=" . $user['id']
+                        . "' width=100px></a></td>";
+                } else {
+                    echo "<td></td>";
+                }
                 echo "<td>" . $user['firstName'] . " " . $user['lastName'] . "<br><a href=\"mailto:" . $user['email']
                     . "\">" . $user['email'] . "</a>";
 
@@ -46,12 +52,6 @@ include_once "constants.php";
 
                 echo "</td>";
                 echo "<td>" . $user['username'] . "</td>";
-                if ($user['image'] != "") {
-                    echo "<td><a href='image.php?id=" . $user['id'] . "'><img src='image.php?id=" . $user['id']
-                        . "' width=100px></a></td>";
-                } else {
-                    echo "<td></td>";
-                }
                 if ($user['isAdmin'] != 0) {
                     echo "<td>Oui</td>";
                 } else {

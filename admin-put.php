@@ -12,7 +12,9 @@ if(isset($_GET['id'])) {
 
 if (estRetourFormulaire()) {
     $message = putUser($employeCourant, $_POST);
-    $employeCourant = (new EmployeDao())->getById($_GET['id']);
+    if(isset($_GET['id'])) {
+        $employeCourant = (new EmployeDao())->getById($_GET['id']);
+    }
 }
 
 ?>

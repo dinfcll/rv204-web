@@ -70,6 +70,7 @@ function putUser(Employe $employeCourant, $retourFormulaire)
 {
     $image = "";
     $id = null;
+    $couleur = "";
 
     if ($retourFormulaire['prenom'] != "" and $retourFormulaire['nomfamille'] != "") {
         $prenom = $retourFormulaire['prenom'];
@@ -119,10 +120,12 @@ function putUser(Employe $employeCourant, $retourFormulaire)
     if(!is_int(intval($retourFormulaire['rpiIpLastInteger']))) {
         return messageErreur("Adresse Raspberry Pi invalide");
     } else {
-        if(isset($retourFormulaire['couleur'])  && $retourFormulaire['couleur'] != "") {
-            $couleur = $retourFormulaire['couleur'];
-        } else {
-            return messageErreur("Vous devez choisir une couleur");
+        if(intval($retourFormulaire['rpiIpLastInteger']) > 0) {
+            if(isset($retourFormulaire['couleur'])  && $retourFormulaire['couleur'] != "") {
+                $couleur = $retourFormulaire['couleur'];
+            } else {
+                return messageErreur("Vous devez choisir une couleur");
+            }
         }
     }
 
