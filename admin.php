@@ -28,8 +28,8 @@ include_once "constants.php";
                 <th>Employé</th>
                 <th>Utilisateur</th>
                 <th>Admin</th>
-                <th>Modifier</th>
-                <th>Supprimer</th>
+                <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
