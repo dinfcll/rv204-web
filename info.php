@@ -1,7 +1,7 @@
 <?php
 include "accesbd.class.php";
 include "info-helper.php";
-include "constants.php";
+include_once "constants.php";
 
 session_start();
 

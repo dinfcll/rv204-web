@@ -2,7 +2,7 @@
 
 include "admin-verification.php";
 include "header.php";
-include "constants.php";
+include_once "constants.php";
 
 ?>
 
