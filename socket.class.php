@@ -5,11 +5,10 @@ class Socket
     private $socket;
     private $connected = false;
 
-    //Reçoit en paramètre l'adresse (127.0.0.1:4444 , par exemple)
-    public function __construct($adresse)
+    public function __construct($adresse, $port)
     {
         try {
-            $this->socket = stream_socket_client('tcp://'. $adresse);
+            $this->socket = stream_socket_client('tcp://'. $adresse . ':' . $port);
             $this->connected = true;
         } catch (Exception $e) {
             $this->connected = false;

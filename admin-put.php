@@ -12,6 +12,7 @@ if(isset($_GET['id'])) {
 
 if (estRetourFormulaire()) {
     $message = putUser($employeCourant, $_POST);
+    $employeCourant = (new EmployeDao())->getById($_GET['id']);
 }
 
 ?>
@@ -90,6 +91,11 @@ if (estRetourFormulaire()) {
 
         <label>
             Droits d'administrateur : <input type="checkbox" id="admin" name="admin" <?php if($employeCourant->isAdmin()) {echo "checked";} ?>>
+        </label><br>
+
+        <label>
+            Raspberry Pi (dernier chiffre de l'adresse IP. -1 lorsqu'il n'y en a pas) :
+            <input type="text" id="rpiIpLastInteger" name="rpiIpLastInteger" value="<?php echo $employeCourant->getRpiIpLastInteger() ?>">
         </label><br>
 
         <button type="submit" class="btn btn-primary">Créer</button>

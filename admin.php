@@ -2,6 +2,7 @@
 
 include "admin-verification.php";
 include "header.php";
+include "constants.php";
 
 ?>
 
@@ -36,7 +37,13 @@ include "header.php";
                 echo "<tr>";
                 echo "<td>" . $user['id'] . "</td>";
                 echo "<td>" . $user['firstName'] . " " . $user['lastName'] . "<br><a href=\"mailto:" . $user['email']
-                    . "\">" . $user['email'] . "</a></td>";
+                    . "\">" . $user['email'] . "</a>";
+
+                if($user['rpiIpLastInteger'] > 0) {
+                    echo "<br><b>Raspberry Pi : " . RPI_IP_BEGINNING_ADRESS . $user['rpiIpLastInteger'] . ":" . RPI_PORT . "</b>";
+                }
+
+                echo "</td>";
                 echo "<td>" . $user['username'] . "</td>";
                 echo "<td bgcolor=" . $user['color'] . "></td>";
                 if ($user['image'] != "") {

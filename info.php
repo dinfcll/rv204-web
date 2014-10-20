@@ -1,6 +1,7 @@
 <?php
 include "accesbd.class.php";
 include "info-helper.php";
+include "constants.php";
 
 session_start();
 
@@ -67,15 +68,13 @@ include "header.php";
             Entrez de nouveau : <input type="password" name="password2">
         </label><br>
 
-        <h3>Raspberry Pi</h3>
-        <label>
-            Adresse : <input type="text" name="url" id="url" value="127.0.0.1"><br>
-        </label>
-        <label>
-            Port : <input type="text" name="port" id="port" value="9999"><br>
-        </label>
-        <button type="button" class="btn" onclick="connexion()">Tester la connexion</button><br><br>
-
+        <?php
+            if($employeCourant->getRpiIpLastInteger() > 0) {
+                echo '<h3>Raspberry Pi</h3>
+                        <b>(Adresse : '. RPI_IP_BEGINNING_ADRESS . $employeCourant->getRpiIpLastInteger() . ":" . RPI_PORT .')</b><br>
+                <button type="button" class="btn" onclick="connexion()">Tester la connexion</button><br><br>';
+            }
+        ?>
         <button type="submit" class="btn btn-primary">Modifier</button>
     </form>
 
@@ -125,9 +124,15 @@ include "header.php";
 <script language="JavaScript">
     function connexion() {
         var xmlhttp = new XMLHttpRequest();
-        var url = document.getElementById('url').value;
-        var port = document.getElementById('port').value;
         var couleur = document.getElementById('couleurpreferee').value;
+
+        <?php
+            if($employeCourant->getRpiIpLastInteger() > 0) {
+                echo "var url = '" . RPI_IP_BEGINNING_ADRESS . $employeCourant->getRpiIpLastInteger() . ":" . RPI_PORT . "';";
+            } else {
+                echo "var url = '';";
+            }
+        ?>
 
         xmlhttp.onreadystatechange= function() {
             if(xmlhttp.readyState == 4) {
@@ -149,7 +154,7 @@ include "header.php";
 
         xmlhttp.open("POST", "socket-ressource.php", true);
         xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        xmlhttp.send("color=" + couleur + "&url=" + url + ":" + port);
+        xmlhttp.send("color=" + couleur + "&url=" + url);
     }
 </script>
 

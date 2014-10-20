@@ -10,6 +10,7 @@ class EmployeBuilder {
     private $isAdmin = false;
     private $email = "";
     private $image = "";
+    private $rpiIpLastInteger = -1;
 
     public function color($color)
     {
@@ -65,6 +66,12 @@ class EmployeBuilder {
         return $this;
     }
 
+    public function rpiIpLastInteger($rpiIpLastInteger)
+    {
+        $this->rpiIpLastInteger = $rpiIpLastInteger;
+        return $this;
+    }
+
     public function getColor()
     {
         return $this->color;
@@ -110,6 +117,11 @@ class EmployeBuilder {
         return $this->username;
     }
 
+    public function getRpiIpLastInteger()
+    {
+        return $this->rpiIpLastInteger;
+    }
+
     function build() {
         return new Employe($this);
     }
@@ -126,6 +138,7 @@ class Employe {
     private $isAdmin;
     private $email;
     private $image;
+    private $rpiIpLastInteger;
 
     function __construct(EmployeBuilder $employeBuilder)
     {
@@ -138,6 +151,7 @@ class Employe {
         $this->isAdmin = $employeBuilder->getIsAdmin();
         $this->email = $employeBuilder->getEmail();
         $this->image = $employeBuilder->getImage();
+        $this->rpiIpLastInteger = $employeBuilder->getRpiIpLastInteger();
     }
 
     public function getColor()
@@ -185,6 +199,11 @@ class Employe {
         return $this->username;
     }
 
+    public function getRpiIpLastInteger()
+    {
+        return $this->rpiIpLastInteger;
+    }
+
     public function setColor($color)
     {
         $this->color = $color;
@@ -228,5 +247,10 @@ class Employe {
     public function setUsername($username)
     {
         $this->username = $username;
+    }
+
+    public function setRpiIpLastInteger($rpiIpLastInteger)
+    {
+        $this->rpiIpLastInteger = $rpiIpLastInteger;
     }
 } 

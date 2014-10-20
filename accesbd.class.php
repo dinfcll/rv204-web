@@ -33,7 +33,8 @@ class AccesBD
                               color VARCHAR (10),
                               image BLOB,
                               isAdmin INTEGER,
-                              email VARCHAR (100)
+                              email VARCHAR (100),
+                              rpiIpLastInteger INTEGER
                               );
                           ");
     }
@@ -87,6 +88,7 @@ class AccesBD
             ->lastName("Lafleur")
             ->isAdmin(true)
             ->image(file_get_contents("usagers_images/sauvage.png"))
+            ->rpiIpLastInteger(1)
             ->build();
 
         $guillaume = (new EmployeBuilder())
@@ -98,6 +100,7 @@ class AccesBD
             ->lastName("Michaud")
             ->isAdmin(true)
             ->image(file_get_contents("usagers_images/grandschtroumpf.png"))
+            ->rpiIpLastInteger(127)
             ->build();
 
         $melissa = (new EmployeBuilder())

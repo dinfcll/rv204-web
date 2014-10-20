@@ -118,6 +118,10 @@ function putUser(Employe $employeCourant, $retourFormulaire)
         }
     }
 
+    if(!is_int(intval($retourFormulaire['rpiIpLastInteger']))) {
+        return messageErreur("Adresse Raspberry Pi invalide");
+    }
+
     $employeDao->put((new EmployeBuilder())
         ->firstName($prenom)
         ->lastName($nomfamille)
@@ -128,6 +132,7 @@ function putUser(Employe $employeCourant, $retourFormulaire)
         ->isAdmin($isAdmin)
         ->image($image)
         ->id($id)
+        ->rpiIpLastInteger($retourFormulaire['rpiIpLastInteger'])
         ->build());
 
     return messageSucces("L'opération a été effectuée avec succès.");
