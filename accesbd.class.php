@@ -87,7 +87,7 @@ class AccesBD
             ->firstName("Olivier")
             ->lastName("Lafleur")
             ->isAdmin(true)
-            ->image(file_get_contents("http://placekitten.com/300/401"))
+            ->image(file_get_contents("usagers_images/sauvage.png"))
             ->rpiIpLastInteger(1)
             ->build();
 
@@ -99,7 +99,7 @@ class AccesBD
             ->firstName("Guillaume")
             ->lastName("Michaud")
             ->isAdmin(true)
-            ->image(file_get_contents("http://placekitten.com/330/440"))
+            ->image(file_get_contents("usagers_images/grandschtroumpf.png"))
             ->rpiIpLastInteger(127)
             ->build();
 
@@ -110,7 +110,7 @@ class AccesBD
             ->email("melissa.clermont@cll.qc.ca")
             ->firstName("Mélissa")
             ->lastName("Clermont")
-            ->image(file_get_contents("http://placekitten.com/363/484"))
+            ->image(file_get_contents("usagers_images/schtroumpfette.png"))
             ->build();
 
         $gilles = (new EmployeBuilder())
@@ -120,7 +120,7 @@ class AccesBD
             ->email("gilles.champagne@cll.qc.ca")
             ->firstName("Gilles")
             ->lastName("Champagne")
-            ->image(file_get_contents("http://placekitten.com/399/532"))
+            ->image(file_get_contents("usagers_images/crayon.png"))
             ->build();
 
         $josee = (new EmployeBuilder())
@@ -130,7 +130,7 @@ class AccesBD
             ->email("josee.lainesse@cll.qc.ca")
             ->firstName("Josée")
             ->lastName("Lainesse")
-            ->image(file_get_contents("http://placekitten.com/440/585"))
+            ->image(file_get_contents("usagers_images/bebe.png"))
             ->build();
 
         $marc = (new EmployeBuilder())
@@ -140,7 +140,7 @@ class AccesBD
             ->email("marc.deslandes@cll.qc.ca")
             ->firstName("Marc")
             ->lastName("Deslandes")
-            ->image(file_get_contents("http://placekitten.com/399/533"))
+            ->image(file_get_contents("usagers_images/fleur.png"))
             ->build();
 
         $lise = (new EmployeBuilder())
@@ -150,7 +150,7 @@ class AccesBD
             ->email("lise.provencher@cll.qc.ca")
             ->firstName("Lise")
             ->lastName("Provencher")
-            ->image(file_get_contents("http://placekitten.com/300/402"))
+            ->image(file_get_contents("usagers_images/tada.png"))
             ->build();
 
         $serge = (new EmployeBuilder())
@@ -160,7 +160,7 @@ class AccesBD
             ->email("serge.levesque@cll.qc.ca")
             ->firstName("Serge")
             ->lastName("Lévesque")
-            ->image(file_get_contents("http://placekitten.com/363/485"))
+            ->image(file_get_contents("usagers_images/vantard.png"))
             ->build();
 
         $this->employeDao->insert($admin);
