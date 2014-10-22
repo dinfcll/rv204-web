@@ -47,7 +47,7 @@ include_once "constants.php";
                     . "\">" . $user['email'] . "</a>";
 
                 if($user['rpiIpLastInteger'] > 0) {
-                    echo "<br><b>RPi : " . RPI_IP_BEGINNING_ADRESS . $user['rpiIpLastInteger'] . "</b>";
+                    echo "<br><b>RPi</b> (" . RPI_IP_BEGINNING_ADRESS . $user['rpiIpLastInteger'] . ")";
                 }
 
                 echo "</td>";
