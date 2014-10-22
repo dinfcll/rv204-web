@@ -44,16 +44,17 @@ if (estRetourFormulaire()) {
 
         <label>
             Prénom : <input type="text" name="prenom" id="prenom" placeholder="(ex : Olivier)"
-                            onkeyup="proposeCourriel()" value="<?php echo $employeCourant->getFirstName(); ?>">
+                            onkeyup="proposeDonnees()" value="<?php echo $employeCourant->getFirstName(); ?>">
         </label><br>
 
         <label>
             Nom : <input type="text" name="nomfamille" id="nomfamille" placeholder="(ex : Lafleur)"
-                         onkeyup="proposeCourriel()" value="<?php echo $employeCourant->getLastName(); ?>">
+                         onkeyup="proposeDonnees()" value="<?php echo $employeCourant->getLastName(); ?>">
         </label><br>
 
         <label>
-            Nom d'utilisateur : <input type="text" name="username" placeholder="(ex : lafleuro)" value="<?php echo $employeCourant->getUsername(); ?>">
+            Nom d'utilisateur : <input type="text" name="username" id="username" placeholder="(ex : lafleuro)"
+                                       value="<?php echo $employeCourant->getUsername(); ?>">
         </label><br>
 
         <label>
@@ -106,12 +107,13 @@ if (estRetourFormulaire()) {
 </div>
 
 <script language="JavaScript">
-    function proposeCourriel() {
+    function proposeDonnees() {
         var prenom = cleanUpSpecialChars(document.getElementById('prenom').value.toLowerCase());
         var nomfamille = cleanUpSpecialChars(document.getElementById('nomfamille').value.toLowerCase());
 
         if (prenom != "" || nomfamile != "") {
             document.getElementById('email').value = prenom + "." + nomfamille + "@cll.qc.ca";
+            document.getElementById('username').value = nomfamille + prenom[0];
         }
     }
 
