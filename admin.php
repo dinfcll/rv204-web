@@ -17,7 +17,6 @@ include_once "constants.php";
         </div>
         <h1>Section Administrateur</h1>
 
-        <em>N.B. Tous les Raspberry Pi utilisent le port <b><?php echo RPI_PORT ?></b> pour communiquer.</em>
         <button class="btn btn-success alignright" onclick="window.location.href='admin-put.php'">Nouvel utilisateur</button><br><br>
 
         <table class="table">
