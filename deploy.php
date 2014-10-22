@@ -25,7 +25,7 @@ define('SECRET_ACCESS_TOKEN', 'asdf1234');
  *
  * @var string
  */
-define('REMOTE_REPOSITORY', 'https://github.com/banctilrobitaille/Projet.git');
+define('REMOTE_REPOSITORY', 'https://gitdinf.cll.qc.ca/rv204/web.git');
 
 /**
  * Which branch are we going to use for deployment.
@@ -40,7 +40,7 @@ define('BRANCH', 'master');
  *
  * @var string Full path including the trailing slash
  */
-define('TARGET_DIR', '/var/mers/html/projet/a2013/equipe2/');
+define('TARGET_DIR', '/usr/share/nginx/html/');
 
 /**
  * Weather to delete the files that are not in the repository but are on the
