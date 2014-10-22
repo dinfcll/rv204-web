@@ -26,7 +26,6 @@ include_once "constants.php";
                 <th>Image</th>
                 <th>Employé</th>
                 <th>Utilisateur</th>
-                <th>Admin</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -43,7 +42,13 @@ include_once "constants.php";
                 } else {
                     echo "<td></td>";
                 }
-                echo "<td>" . $user['firstName'] . " " . $user['lastName'] . "<br><a href=\"mailto:" . $user['email']
+                echo "<td>" . $user['firstName'] . " " . $user['lastName'];
+
+                if ($user['isAdmin'] != 0) {
+                    echo " (Admin)";
+                }
+
+                echo "<br><a href=\"mailto:" . $user['email']
                     . "\">" . $user['email'] . "</a>";
 
                 if($user['rpiIpLastInteger'] > 0) {
@@ -52,11 +57,6 @@ include_once "constants.php";
 
                 echo "</td>";
                 echo "<td>" . $user['username'] . "</td>";
-                if ($user['isAdmin'] != 0) {
-                    echo "<td>Oui</td>";
-                } else {
-                    echo "<td>Non</td>";
-                }
 
                 echo "<td><button class='btn btn-warning' onclick='window.location.href=\"admin-put.php?id=" . $user['id'] . "\"'>Modifier</button></td>";
 
