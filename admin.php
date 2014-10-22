@@ -37,15 +37,14 @@ include_once "constants.php";
                 echo "<tr>";
                 echo "<td>" . $user['id'] . "</td>";
                 if ($user['image'] != "") {
-                    echo "<td><a href='image.php?id=" . $user['id'] . "'><img src='image.php?id=" . $user['id']
-                        . "' width=100px></a></td>";
+                    echo "<td><img src='image.php?id=" . $user['id'] . "' width=100px></td>";
                 } else {
                     echo "<td></td>";
                 }
                 echo "<td>" . $user['firstName'] . " " . $user['lastName'];
 
                 if ($user['isAdmin'] != 0) {
-                    echo " (Admin)";
+                    echo " (admin)";
                 }
 
                 echo "<br><a href=\"mailto:" . $user['email']
