@@ -82,9 +82,9 @@ include_once "config.php";
                 echo "</td>";
                 echo "<td>" . $user['username'] . "</td>";
 
-                echo "<td><button class='btn btn-warning' onclick='window.location.href=\"admin-put.php?id=" . $user['id'] . "\"'>Modifier</button></td>";
+                echo "<td class=colButton><button class='btn btn-warning' onclick='window.location.href=\"admin-put.php?id=" . $user['id'] . "\"'>Modifier</button></td>";
 
-                echo "<td><button class='btn btn-danger' onclick=\"sweetConfirmDelete(" . $user['id'] . ");\">Supprimer</button></td>";
+                echo "<td class=colButton><button class='btn btn-danger' onclick=\"sweetConfirmDelete(" . $user['id'] . ");\">Supprimer</button></td>";
 
                 echo "</tr>";
             }
