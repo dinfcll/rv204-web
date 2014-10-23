@@ -43,12 +43,14 @@ class AccesBD
     {
         $this->pdo->query("CREATE TABLE IF NOT EXISTS config (
                               id INTEGER PRIMARY KEY AUTOINCREMENT,
-                              rpiNetwork VARCHAR(20)
+                              rpiNetwork VARCHAR(20),
+                              mailgunDomain VARCHAR(100),
+                              mailgunApiKey VARCHAR(100)
                               );
                           ");
 
-        $this->pdo->query("INSERT INTO config (id, rpiNetwork)
-                            VALUES (1, '127.0.0.')");
+        $this->pdo->query("INSERT INTO config (id, rpiNetwork, mailgunDomain, mailgunApiKey)
+                            VALUES (1, '127.0.0.', 'mailgun.com', 'key-3ax6xnjp29jd6fds4gc373sgvjxteol0')");
     }
 
     public function modifierRpiNetwork($rpiNetwork)
@@ -66,6 +68,40 @@ class AccesBD
         $result = $stmt->fetchAll();
 
         return $result[0]['rpiNetwork'];
+    }
+
+    public function modifierMailgunDomain($mailgunDomain)
+    {
+        $this->pdo->query("UPDATE config
+                            SET mailgunDomain='".$mailgunDomain."'
+                            WHERE id=1");
+    }
+
+    public function getMailgunDomain()
+    {
+        $stmt = $this->pdo->prepare("SELECT mailgunDomain FROM config WHERE id = 1");
+        $stmt->execute();
+
+        $result = $stmt->fetchAll();
+
+        return $result[0]['mailgunDomain'];
+    }
+
+    public function modifierMailgunApiKey($mailgunApiKey)
+    {
+        $this->pdo->query("UPDATE config
+                            SET mailgunApiKey='".$mailgunApiKey."'
+                            WHERE id=1");
+    }
+
+    public function getMailgunApiKey()
+    {
+        $stmt = $this->pdo->prepare("SELECT mailgunApiKey FROM config WHERE id = 1");
+        $stmt->execute();
+
+        $result = $stmt->fetchAll();
+
+        return $result[0]['mailgunApiKey'];
     }
 
     public function utilisateurValide($username, $enteredPassword)
@@ -105,9 +141,10 @@ class AccesBD
         return false;
     }
 
-    public function supprimerTable()
+    public function supprimerTables()
     {
         $this->pdo->query("DROP TABLE IF EXISTS users;");
+        $this->pdo->query("DROP TABLE IF EXISTS config;");
     }
 
     public function creerUsagersStandards()

@@ -1,5 +1,7 @@
 <?php
 
+include_once "accesbd.class.php";
+
 function estRetourFormulaire()
 {
     return !empty($_POST);
@@ -193,4 +195,28 @@ function cropImage($uploadfile, $uploaddir, $type)
     imagejpeg($dst_r, $output_filename, $jpeg_quality);
 
     return $output_filename;
+}
+
+function majAdmin($retourFormulaire) {
+    $adresse = trim($retourFormulaire['rpiAddress']);
+    $longueur = strlen($adresse);
+
+    if($adresse[$longueur-1] != "0") {
+        return messageErreur("Adresse invalide");
+    }
+
+    if($retourFormulaire['mailgunDomain'] == "") {
+        return messageErreur("Veuillez entrer un domaine Mailgun");
+    }
+
+    if($retourFormulaire['mailgunApiKey'] == "") {
+        return messageErreur("Veuillez entrer une clé d'API Mailgun");
+    }
+
+    $monacces = new AccesBD();
+    $monacces->modifierRpiNetwork(substr($adresse, 0, -1));
+    $monacces->modifierMailgunDomain($retourFormulaire['mailgunDomain']);
+    $monacces->modifierMailgunApiKey($retourFormulaire['mailgunApiKey']);
+
+    return messageSucces("Changement de configuration effectué.");
 }

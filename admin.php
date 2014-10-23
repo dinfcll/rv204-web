@@ -7,14 +7,7 @@ include_once "accesbd.class.php";
 $monacces = new AccesBD();
 
 if(estRetourFormulaire()) {
-    $adresse = trim($_POST['rpiAddress']);
-    $longueur = strlen($adresse);
-    if($adresse[$longueur-1] != "0") {
-        $message = messageErreur("Adresse invalide");
-    } else {
-        $monacces->modifierRpiNetwork(substr($adresse, 0, -1));
-        $message = messageSucces("Changement d'adresse IP effectué.");
-    }
+    $message = majAdmin($_POST);
 }
 
 //Affichage
@@ -38,7 +31,15 @@ include_once "config.php";
             <label>Réseau RPi :
                 <input type="text" name="rpiAddress" value="<?php echo RPI_IP_BEGINNING_ADRESS . "0" ?>">
             </label>
-            <button class="btn btn-primary" type="submit">Modiifer</button>
+
+            <label>Domaine Mailgun :
+                <input type="text" name="mailgunDomain" value="<?php echo $monacces->getMailgunDomain() ?>">
+            </label>
+
+            <label>Clé API Mailgun :
+                <input type="text" name="mailgunApiKey" value="<?php echo $monacces->getMailgunApiKey() ?>">
+            </label>
+            <button class="btn btn-primary" type="submit">Modifier</button>
         </form><p>
 
         <button class="btn btn-success alignright" onclick="window.location.href='admin-put.php'">Nouvel utilisateur</button><br><br>
