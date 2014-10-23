@@ -7,3 +7,7 @@ if ($monAcces->applicationNonInstallee()) {
     $monAcces->creerTableEmployes();
     $monAcces->creerUsagersStandards();
 }
+
+if($monAcces->pasDeConfig()) {
+    $monAcces->creerConfigurations();
+}

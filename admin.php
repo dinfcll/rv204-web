@@ -1,8 +1,25 @@
 <?php
 
-include "admin-verification.php";
+include_once "admin-verification.php";
+include_once "info-helper.php";
+include_once "accesbd.class.php";
+
+$monacces = new AccesBD();
+
+if(estRetourFormulaire()) {
+    $adresse = trim($_POST['rpiAddress']);
+    $longueur = strlen($adresse);
+    if($adresse[$longueur-1] != "0") {
+        $message = messageErreur("Adresse invalide");
+    } else {
+        $monacces->modifierRpiNetwork(substr($adresse, 0, -1));
+        $message = messageSucces("Changement d'adresse IP effectué.");
+    }
+}
+
+//Affichage
 include "header.php";
-include_once "constants.php";
+include_once "config.php";
 
 ?>
 
@@ -16,6 +33,13 @@ include_once "constants.php";
             ?>
         </div>
         <h1>Section Administrateur</h1>
+
+        <form method="post" action="admin.php">
+            <label>Réseau RPi :
+                <input type="text" name="rpiAddress" value="<?php echo RPI_IP_BEGINNING_ADRESS . "0" ?>">
+            </label>
+            <button class="btn btn-primary" type="submit">Modiifer</button>
+        </form><p>
 
         <button class="btn btn-success alignright" onclick="window.location.href='admin-put.php'">Nouvel utilisateur</button><br><br>
 

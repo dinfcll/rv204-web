@@ -1,7 +1,7 @@
 <?php
 
 include "socket.class.php";
-include_once 'constants.php';
+include_once 'config.php';
 
 if(isset($_POST['color']) && isset($_POST['url'])) {
     $socket = new Socket($_POST['url'], RPI_PORT);

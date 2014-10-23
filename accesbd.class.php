@@ -39,6 +39,35 @@ class AccesBD
                           ");
     }
 
+    public function creerConfigurations()
+    {
+        $this->pdo->query("CREATE TABLE IF NOT EXISTS config (
+                              id INTEGER PRIMARY KEY AUTOINCREMENT,
+                              rpiNetwork VARCHAR(20)
+                              );
+                          ");
+
+        $this->pdo->query("INSERT INTO config (id, rpiNetwork)
+                            VALUES (1, '127.0.0.')");
+    }
+
+    public function modifierRpiNetwork($rpiNetwork)
+    {
+        $this->pdo->query("UPDATE config
+                            SET rpiNetwork='".$rpiNetwork."'
+                            WHERE id=1");
+    }
+
+    public function getRpiNetwork()
+    {
+        $stmt = $this->pdo->prepare("SELECT rpiNetwork FROM config WHERE id = 1");
+        $stmt->execute();
+
+        $result = $stmt->fetchAll();
+
+        return $result[0]['rpiNetwork'];
+    }
+
     public function utilisateurValide($username, $enteredPassword)
     {
         $storedPassword = $this->employeDao->getByUsername($username)->getPassword();
@@ -58,6 +87,17 @@ class AccesBD
     {
         try {
             $this->pdo->prepare("SELECT 1 FROM users LIMIT 1");
+        } catch (Exception $e) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function pasDeConfig()
+    {
+        try {
+            $this->pdo->prepare("SELECT 1 FROM config LIMIT 1");
         } catch (Exception $e) {
             return true;
         }
