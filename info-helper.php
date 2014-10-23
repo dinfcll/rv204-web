@@ -44,7 +44,7 @@ function maj(Employe $employeCourant)
 
     $image = $employeCourant->getImage();
 
-    if($_FILES['image']['error'] == 1) {
+    if ($_FILES['image']['error'] == 1) {
         return messageErreur("L'image est trop pesante. Quelque chose de moins lourd, peut-être?");
     }
 
@@ -101,9 +101,15 @@ function putUser(Employe $employeCourant, $retourFormulaire)
         $isAdmin = 0;
     }
 
+    if (isset($retourFormulaire['rpi'])) {
+        $hasRpi = 1;
+    } else {
+        $hasRpi = 0;
+    }
+
     $employeDao = new EmployeDao();
 
-    if(isset($retourFormulaire['id'])) {
+    if (isset($retourFormulaire['id'])) {
         $id = $retourFormulaire['id'];
 
         $image = $employeDao->getById($retourFormulaire['id'])->getImage();
@@ -117,17 +123,14 @@ function putUser(Employe $employeCourant, $retourFormulaire)
         }
     }
 
-    if(!is_int(intval($retourFormulaire['rpiIpLastInteger']))) {
-        return messageErreur("Adresse Raspberry Pi invalide");
-    } else {
-        if(intval($retourFormulaire['rpiIpLastInteger']) > 0) {
-            if(isset($retourFormulaire['couleur'])  && $retourFormulaire['couleur'] != "") {
-                $couleur = $retourFormulaire['couleur'];
-            } else {
-                return messageErreur("Vous devez choisir une couleur");
-            }
+    if ($hasRpi) {
+        if (isset($retourFormulaire['couleur']) && $retourFormulaire['couleur'] != "") {
+            $couleur = $retourFormulaire['couleur'];
+        } else {
+            return messageErreur("Vous devez choisir une couleur");
         }
     }
+
 
     $employeDao->put((new EmployeBuilder())
         ->firstName($prenom)
@@ -139,7 +142,7 @@ function putUser(Employe $employeCourant, $retourFormulaire)
         ->isAdmin($isAdmin)
         ->image($image)
         ->id($id)
-        ->rpiIpLastInteger($retourFormulaire['rpiIpLastInteger'])
+        ->hasRpi($hasRpi)
         ->build());
 
     return messageSucces("L'opération a été effectuée avec succès.");
@@ -160,8 +163,9 @@ function messageInfo($message)
     return message($message, "info");
 }
 
-function message($message, $class) {
-    return "<div class=\"alert alert-". $class ."\">" . $message . "</div>";
+function message($message, $class)
+{
+    return "<div class=\"alert alert-" . $class . "\">" . $message . "</div>";
 }
 
 function cropImage($uploadfile, $uploaddir, $type)

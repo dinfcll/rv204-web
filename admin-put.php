@@ -93,8 +93,8 @@ if (estRetourFormulaire()) {
         </label><br>
 
         <label>
-            Raspberry Pi (dernier chiffre de l'adresse IP. -1 lorsqu'il n'y en a pas) :
-            <input type="text" id="rpiIpLastInteger" name="rpiIpLastInteger" value="<?php echo $employeCourant->getRpiIpLastInteger() ?>" size="3" maxlength="3">
+            Raspberry Pi :
+            <input type="checkbox" id="rpi" name="rpi" <?php if($employeCourant->getHasRpi()) {echo "checked";} ?>>
         </label><br>
 
         <label>

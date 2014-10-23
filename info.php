@@ -66,9 +66,9 @@ include "header.php";
         </label><br>
 
         <?php
-            if($employeCourant->getRpiIpLastInteger() > 0) {
+            if($employeCourant->getHasRpi()) {
                 echo '<h3>Raspberry Pi</h3>
-                        <b>(Adresse : '. RPI_IP_BEGINNING_ADRESS . $employeCourant->getRpiIpLastInteger() . ":" . RPI_PORT .')</b><br>
+                        <b>(Adresse : '. RPI_IP_BEGINNING_ADRESS . $employeCourant->getId() . ":" . RPI_PORT .')</b><br>
                 <button type="button" class="btn" onclick="connexion()">Tester la connexion</button><br><br>';
 
                 echo '<h4>Votre couleur</h4>';
@@ -128,8 +128,8 @@ include "header.php";
         var couleur = document.getElementById('couleur').value;
 
         <?php
-            if($employeCourant->getRpiIpLastInteger() > 0) {
-                echo "var url = '" . RPI_IP_BEGINNING_ADRESS . $employeCourant->getRpiIpLastInteger() . ":" . RPI_PORT . "';";
+            if($employeCourant->getHasRpi()) {
+                echo "var url = '" . RPI_IP_BEGINNING_ADRESS . $employeCourant->getId() . ":" . RPI_PORT . "';";
             } else {
                 echo "var url = '';";
             }

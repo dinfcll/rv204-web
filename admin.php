@@ -50,8 +50,8 @@ include_once "constants.php";
                 echo "<br><a href=\"mailto:" . $user['email']
                     . "\">" . $user['email'] . "</a>";
 
-                if($user['rpiIpLastInteger'] > 0) {
-                    echo "<br><b>RPi</b> (" . RPI_IP_BEGINNING_ADRESS . $user['rpiIpLastInteger'] . ")";
+                if($user['hasRpi']) {
+                    echo "<br><b>RPi</b> (" . RPI_IP_BEGINNING_ADRESS . $user['id'] . ")";
                 }
 
                 echo "</td>";
