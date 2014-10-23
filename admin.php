@@ -29,16 +29,16 @@ include_once "config.php";
 
         <form method="post" action="admin.php">
             <label>Réseau RPi :
-                <input type="text" name="rpiAddress" value="<?php echo RPI_IP_BEGINNING_ADRESS . "0" ?>">
-            </label>
+                <input type="text" name="rpiAddress" value="<?php echo RPI_IP_BEGINNING_ADRESS . "0" ?>" maxlength="20">
+            </label><br>
 
             <label>Domaine Mailgun :
                 <input type="text" name="mailgunDomain" value="<?php echo $monacces->getMailgunDomain() ?>">
-            </label>
+            </label><br>
 
             <label>Clé API Mailgun :
                 <input type="text" name="mailgunApiKey" value="<?php echo $monacces->getMailgunApiKey() ?>">
-            </label>
+            </label><br>
             <button class="btn btn-primary" type="submit">Modifier</button>
         </form><p>
 
