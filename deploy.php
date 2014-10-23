@@ -134,7 +134,6 @@ $binaries = array();
 $binaries['git'] = "/usr/bin/git";
 $binaries['tar'] = "/bin/tar";
 $binaries['rsync'] = "/usr/bin/rsync";
-echo "Les paths sont donnés.";
 ?>
 
 Environment OK.
