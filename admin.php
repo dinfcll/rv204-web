@@ -47,7 +47,7 @@ include_once "config.php";
         <table class="table">
             <thead>
             <tr>
-                <th>#</th>
+                <th>ID</th>
                 <th>Image</th>
                 <th>Employé</th>
                 <th>Utilisateur</th>
