@@ -6,7 +6,7 @@ include_once "accesbd.class.php";
 
 $monacces = new AccesBD();
 
-if(estRetourFormulaire()) {
+if (estRetourFormulaire()) {
     $message = majAdmin($_POST);
 }
 
@@ -20,77 +20,92 @@ include_once "config.php";
     <div class="page-header">
         <div id="message">
             <?php
-                if (isset($message)) {
-                    echo $message;
-                }
+            if (isset($message)) {
+                echo $message;
+            }
             ?>
         </div>
         <h1>Section Administrateur</h1>
 
-        <form method="post" action="admin.php">
-            <label>Réseau RPi :
-                <input type="text" name="rpiAddress" value="<?php echo RPI_IP_BEGINNING_ADRESS . "0" ?>" maxlength="20">
-            </label><br>
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active"><a href="#users" role="tab" data-toggle="tab">Utilisateurs</a></li>
+            <li><a href="#config" role="tab" data-toggle="tab">Configuration</a></li>
+        </ul>
 
-            <label>Domaine Mailgun :
-                <input type="text" name="mailgunDomain" value="<?php echo $monacces->getMailgunDomain() ?>">
-            </label><br>
+        <div class="tab-content">
+            <div class="tab-pane active" id="users">
+                <button class="btn btn-success alignright" onclick="window.location.href='admin-put.php'">Nouvel
+                    utilisateur
+                </button>
+                <br><br>
 
-            <label>Clé API Mailgun :
-                <input type="text" name="mailgunApiKey" value="<?php echo $monacces->getMailgunApiKey() ?>">
-            </label><br>
-            <button class="btn btn-primary" type="submit">Modifier</button>
-        </form><p>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Image</th>
+                        <th>Employé</th>
+                        <th>Utilisateur</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    $users = (new EmployeDao())->getAll();
+                    foreach ($users as $user) {
+                        echo "<tr>";
+                        echo "<td>" . $user['id'] . "</td>";
+                        if ($user['image'] != "") {
+                            echo "<td><img src='image.php?id=" . $user['id'] . "' width=100px></td>";
+                        } else {
+                            echo "<td></td>";
+                        }
+                        echo "<td>" . $user['firstName'] . " " . $user['lastName'];
 
-        <button class="btn btn-success alignright" onclick="window.location.href='admin-put.php'">Nouvel utilisateur</button><br><br>
+                        if ($user['isAdmin'] != 0) {
+                            echo " (admin)";
+                        }
 
-        <table class="table">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Image</th>
-                <th>Employé</th>
-                <th>Utilisateur</th>
-                <th></th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php
-            $users = (new EmployeDao())->getAll();
-            foreach ($users as $user) {
-                echo "<tr>";
-                echo "<td>" . $user['id'] . "</td>";
-                if ($user['image'] != "") {
-                    echo "<td><img src='image.php?id=" . $user['id'] . "' width=100px></td>";
-                } else {
-                    echo "<td></td>";
-                }
-                echo "<td>" . $user['firstName'] . " " . $user['lastName'];
+                        echo "<br><a href=\"mailto:" . $user['email']
+                            . "\">" . $user['email'] . "</a>";
 
-                if ($user['isAdmin'] != 0) {
-                    echo " (admin)";
-                }
+                        if ($user['hasRpi']) {
+                            echo "<br><b>RPi</b> (" . RPI_IP_BEGINNING_ADRESS . $user['id'] . ")";
+                        }
 
-                echo "<br><a href=\"mailto:" . $user['email']
-                    . "\">" . $user['email'] . "</a>";
+                        echo "</td>";
+                        echo "<td>" . $user['username'] . "</td>";
 
-                if($user['hasRpi']) {
-                    echo "<br><b>RPi</b> (" . RPI_IP_BEGINNING_ADRESS . $user['id'] . ")";
-                }
+                        echo "<td class='colButton'><button class='btn btn-warning' onclick='window.location.href=\"admin-put.php?id=" . $user['id'] . "\"'>Modifier</button></td>";
 
-                echo "</td>";
-                echo "<td>" . $user['username'] . "</td>";
+                        echo "<td class='colButton'><button class='btn btn-danger' onclick=\"sweetConfirmDelete(" . $user['id'] . ");\">Supprimer</button></td>";
 
-                echo "<td class='colButton'><button class='btn btn-warning' onclick='window.location.href=\"admin-put.php?id=" . $user['id'] . "\"'>Modifier</button></td>";
+                        echo "</tr>";
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane" id="config"><br>
+                <form method="post" action="admin.php">
+                    <label>Réseau RPi :
+                        <input type="text" name="rpiAddress" value="<?php echo RPI_IP_BEGINNING_ADRESS . "0" ?>"
+                               maxlength="20">
+                    </label><br>
 
-                echo "<td class='colButton'><button class='btn btn-danger' onclick=\"sweetConfirmDelete(" . $user['id'] . ");\">Supprimer</button></td>";
+                    <label>Domaine Mailgun :
+                        <input type="text" name="mailgunDomain" value="<?php echo $monacces->getMailgunDomain() ?>">
+                    </label><br>
 
-                echo "</tr>";
-            }
-            ?>
-            </tbody>
-        </table>
+                    <label>Clé API Mailgun :
+                        <input type="text" name="mailgunApiKey" value="<?php echo $monacces->getMailgunApiKey() ?>">
+                    </label><br>
+                    <button class="btn btn-primary" type="submit">Modifier</button>
+                </form>
+                <p></div>
+        </div>
+
 
     </div>
 
@@ -105,8 +120,8 @@ include_once "config.php";
                 confirmButtonColor: '#DD6B55',
                 confirmButtonText: 'Supprimer'
             },
-            function(){
-                window.location.href="admin-supprimer.php?id=" + id;
+            function () {
+                window.location.href = "admin-supprimer.php?id=" + id;
             });
     }
 </script>
