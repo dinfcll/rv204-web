@@ -50,7 +50,7 @@ class AccesBD
                           ");
 
         $this->pdo->query("INSERT INTO config (id, rpiNetwork, mailgunDomain, mailgunApiKey)
-                            VALUES (1, '127.0.0.', 'mailgun.com', 'key-3ax6xnjp29jd6fds4gc373sgvjxteol0')");
+                            VALUES (1, '192.168.0.0', 'dinf.qc.to', 'key-8gn080hwlfdud6ctmtm1d66ulwg4p0t9')");
     }
 
     public function modifierRpiNetwork($rpiNetwork)
