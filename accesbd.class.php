@@ -172,7 +172,7 @@ class AccesBD
             ->username("michaudg")
             ->password(password_hash("admin#123", PASSWORD_DEFAULT))
             ->color("#7FDBFF")
-            ->email("michaudg@cll.qc.ca")
+            ->email("guillaume.michaud@cll.qc.ca")
             ->firstName("Guillaume")
             ->lastName("Michaud")
             ->isAdmin(true)
