@@ -71,7 +71,7 @@ include_once "config.php";
                             . "\">" . $user['email'] . "</a>";
 
                         if ($user['hasRpi']) {
-                            echo "<br><b>RPi</b> (" . RPI_IP_BEGINNING_ADRESS . $user['id'] . ")";
+                            echo "<br><b>RPi</b> (" . retourneRpiIp($user['id']) . ")";
                         }
 
                         echo "</td>";
@@ -90,7 +90,7 @@ include_once "config.php";
             <div class="tab-pane" id="config"><br>
                 <form method="post" action="admin.php">
                     <label>Réseau RPi :
-                        <input type="text" name="rpiAddress" value="<?php echo RPI_IP_BEGINNING_ADRESS . "0" ?>"
+                        <input type="text" name="rpiAddress" value="<?php echo RPI_IP_BEGINNING_ADRESS ?>"
                                maxlength="20">
                     </label><br>
 

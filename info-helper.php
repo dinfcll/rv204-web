@@ -198,13 +198,6 @@ function cropImage($uploadfile, $uploaddir, $type)
 }
 
 function majAdmin($retourFormulaire) {
-    $adresse = trim($retourFormulaire['rpiAddress']);
-    $longueur = strlen($adresse);
-
-    if($adresse[$longueur-1] != "0") {
-        return messageErreur("Adresse invalide");
-    }
-
     if($retourFormulaire['mailgunDomain'] == "") {
         return messageErreur("Veuillez entrer un domaine Mailgun");
     }
@@ -214,9 +207,20 @@ function majAdmin($retourFormulaire) {
     }
 
     $monacces = new AccesBD();
-    $monacces->modifierRpiNetwork(substr($adresse, 0, -1));
+    $monacces->modifierRpiNetwork($retourFormulaire['rpiAddress']);
     $monacces->modifierMailgunDomain($retourFormulaire['mailgunDomain']);
     $monacces->modifierMailgunApiKey($retourFormulaire['mailgunApiKey']);
 
     return messageSucces("Changement de configuration effectué.");
+}
+
+function retourneRpiIp($id) {
+    $tokens = explode('.', RPI_IP_BEGINNING_ADRESS);
+    $lastInt = intval($tokens[3]);
+    array_pop($tokens);
+    $newString = implode('.', $tokens);
+
+    $newLastInt = $lastInt + intval($id);
+
+    return $newString . "." . $newLastInt;
 }

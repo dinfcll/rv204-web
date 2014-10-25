@@ -68,7 +68,7 @@ include "header.php";
         <?php
             if($employeCourant->getHasRpi()) {
                 echo '<h3>Raspberry Pi</h3>
-                        <b>(Adresse : '. RPI_IP_BEGINNING_ADRESS . $employeCourant->getId() . ":" . RPI_PORT .')</b><br>
+                        <b>(Adresse : '. retourneRpiIp($employeCourant->getId()) . ":" . RPI_PORT .')</b><br>
                 <button type="button" class="btn" onclick="connexion()">Tester la connexion</button><br><br>';
 
                 echo '<h4>Votre couleur</h4>';
@@ -129,7 +129,7 @@ include "header.php";
 
         <?php
             if($employeCourant->getHasRpi()) {
-                echo "var url = '" . RPI_IP_BEGINNING_ADRESS . $employeCourant->getId() . ":" . RPI_PORT . "';";
+                echo "var url = '" . retourneRpiIp($employeCourant->getId()) . ":" . RPI_PORT . "';";
             } else {
                 echo "var url = '';";
             }
