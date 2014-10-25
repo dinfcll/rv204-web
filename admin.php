@@ -55,7 +55,7 @@ include_once "config.php";
                     $users = (new EmployeDao())->getAll();
                     foreach ($users as $user) {
                         echo "<tr>";
-                        echo "<td>" . $user['id'] . "</td>";
+                        echo "<td><b>" . $user['id'] . "</b></td>";
                         if ($user['picture'] != "") {
                             echo "<td><img src='picture.php?id=" . $user['id'] . "' width=100px></td>";
                         } else {
@@ -77,9 +77,9 @@ include_once "config.php";
                         echo "</td>";
                         echo "<td>" . $user['username'] . "</td>";
 
-                        echo "<td class='colButton'><button class='btn btn-warning' onclick='window.location.href=\"admin-put.php?id=" . $user['id'] . "\"'>Modifier</button></td>";
+                        echo "<td><button class='btn btn-warning' onclick='window.location.href=\"admin-put.php?id=" . $user['id'] . "\"'>Modifier</button></td>";
 
-                        echo "<td class='colButton'><button class='btn btn-danger' onclick=\"sweetConfirmDelete(" . $user['id'] . ");\">Supprimer</button></td>";
+                        echo "<td><button class='btn btn-danger' onclick=\"sweetConfirmDelete(" . $user['id'] . ");\">Supprimer</button></td>";
 
                         echo "</tr>";
                     }
