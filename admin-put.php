@@ -68,8 +68,8 @@ if (estRetourFormulaire()) {
             <div id="image-explication"></div>
             <div id="image-container">
                 <?php
-                if ($employeCourant->getImage() != "") {
-                    echo '<img src="image.php?id=' . $employeCourant->getId() . '" width="300px" id="target"><br>';
+                if ($employeCourant->getPicture() != "") {
+                    echo '<img src="picture.php?id=' . $employeCourant->getId() . '" width="300px" id="target"><br>';
                 } else {
                     echo '<img src="" width="300px" height="400px" id="target"><br>';
                 }

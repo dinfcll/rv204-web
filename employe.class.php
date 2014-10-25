@@ -9,7 +9,7 @@ class EmployeBuilder {
     private $color = "";
     private $isAdmin = false;
     private $email = "";
-    private $image = "";
+    private $picture = "";
     private $hasRpi = false;
 
     public function color($color)
@@ -36,9 +36,9 @@ class EmployeBuilder {
         return $this;
     }
 
-    public function image($image)
+    public function picture($picture)
     {
-        $this->image = $image;
+        $this->picture = $picture;
         return $this;
     }
 
@@ -92,9 +92,9 @@ class EmployeBuilder {
         return $this->id;
     }
 
-    public function getImage()
+    public function getPicture()
     {
-        return $this->image;
+        return $this->picture;
     }
 
     public function getIsAdmin()
@@ -137,7 +137,7 @@ class Employe {
     private $color;
     private $isAdmin;
     private $email;
-    private $image;
+    private $picture;
     private $hasRpi;
 
     function __construct(EmployeBuilder $employeBuilder)
@@ -150,7 +150,7 @@ class Employe {
         $this->color = $employeBuilder->getColor();
         $this->isAdmin = $employeBuilder->getIsAdmin();
         $this->email = $employeBuilder->getEmail();
-        $this->image = $employeBuilder->getImage();
+        $this->picture = $employeBuilder->getPicture();
         $this->hasRpi = $employeBuilder->getHasRpi();
     }
 
@@ -174,9 +174,9 @@ class Employe {
         return $this->id;
     }
 
-    public function getImage()
+    public function getPicture()
     {
-        return $this->image;
+        return $this->picture;
     }
 
     public function isAdmin()
@@ -224,9 +224,9 @@ class Employe {
         $this->id = $id;
     }
 
-    public function setImage($image)
+    public function setPicture($picture)
     {
-        $this->image = $image;
+        $this->picture = $picture;
     }
 
     public function setIsAdmin($isAdmin)

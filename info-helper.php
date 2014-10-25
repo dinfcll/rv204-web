@@ -44,7 +44,7 @@ function maj(Employe $employeCourant)
         }
     }
 
-    $image = $employeCourant->getImage();
+    $image = $employeCourant->getPicture();
 
     if ($_FILES['image']['error'] == 1) {
         return messageErreur("L'image est trop pesante. Quelque chose de moins lourd, peut-être?");
@@ -60,7 +60,7 @@ function maj(Employe $employeCourant)
 
     $employeCourant->setPassword($password);
     $employeCourant->setColor($couleur);
-    $employeCourant->setImage($image);
+    $employeCourant->setPicture($image);
     $employeCourant->setEmail($_POST['email']);
 
     (new EmployeDao())->put($employeCourant);
@@ -114,7 +114,7 @@ function putUser(Employe $employeCourant, $retourFormulaire)
     if (isset($retourFormulaire['id'])) {
         $id = $retourFormulaire['id'];
 
-        $image = $employeDao->getById($retourFormulaire['id'])->getImage();
+        $image = $employeDao->getById($retourFormulaire['id'])->getPicture();
     }
 
     if ($_FILES['image']['size'] > 0) {
@@ -142,7 +142,7 @@ function putUser(Employe $employeCourant, $retourFormulaire)
         ->color($couleur)
         ->email($retourFormulaire['email'])
         ->isAdmin($isAdmin)
-        ->image($image)
+        ->picture($image)
         ->id($id)
         ->hasRpi($hasRpi)
         ->build());

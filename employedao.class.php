@@ -44,7 +44,7 @@ class EmployeDao
 
     public function insert(Employe $employe)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO users (firstName, lastName, username, password, color, isAdmin, email, image, id, hasRpi)
+        $stmt = $this->pdo->prepare("INSERT INTO users (firstName, lastName, username, password, color, isAdmin, email, picture, id, hasRpi)
                                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         $stmt->bindValue(1, $employe->getFirstName());
@@ -54,7 +54,7 @@ class EmployeDao
         $stmt->bindValue(5, $employe->getColor());
         $stmt->bindValue(6, $employe->isAdmin());
         $stmt->bindValue(7, $employe->getEmail());
-        $stmt->bindValue(8, $employe->getImage(), PDO::PARAM_LOB);
+        $stmt->bindValue(8, $employe->getPicture(), PDO::PARAM_LOB);
         $stmt->bindValue(9, $employe->getId());
         $stmt->bindValue(10, $employe->getHasRpi());
 
@@ -72,9 +72,9 @@ class EmployeDao
                                          color='" . $employe->getColor() . "',
                                          email='" . $employe->getEmail() . "',
                                          hasRpi='" . $employe->getHasRpi() . "',
-                                         image=?
+                                         picture=?
                                      WHERE id=" . $employe->getId());
-        $stmt->bindValue(1, $employe->getImage(), PDO::PARAM_LOB);
+        $stmt->bindValue(1, $employe->getPicture(), PDO::PARAM_LOB);
         $stmt->execute();
     }
 
@@ -116,7 +116,7 @@ class EmployeDao
             ->firstName($donnees['firstName'])
             ->lastName($donnees['lastName'])
             ->isAdmin($donnees['isAdmin'])
-            ->image($donnees['image'])
+            ->picture($donnees['picture'])
             ->hasRpi($donnees['hasRpi'])
             ->build();
 

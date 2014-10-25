@@ -56,8 +56,8 @@ include_once "config.php";
                     foreach ($users as $user) {
                         echo "<tr>";
                         echo "<td>" . $user['id'] . "</td>";
-                        if ($user['image'] != "") {
-                            echo "<td><img src='image.php?id=" . $user['id'] . "' width=100px></td>";
+                        if ($user['picture'] != "") {
+                            echo "<td><img src='picture.php?id=" . $user['id'] . "' width=100px></td>";
                         } else {
                             echo "<td></td>";
                         }

@@ -31,7 +31,7 @@ class AccesBD
                               username VARCHAR (50),
                               password VARCHAR (50),
                               color VARCHAR (10),
-                              image BLOB,
+                              picture BLOB,
                               isAdmin INTEGER,
                               email VARCHAR (100),
                               hasRpi INTEGER
@@ -112,11 +112,11 @@ class AccesBD
     }
 
     public function genererImage($id) {
-        $stmt = $this->pdo->prepare("SELECT image FROM users WHERE id = " . $id);
+        $stmt = $this->pdo->prepare("SELECT picture FROM users WHERE id = " . $id);
         $stmt->execute();
         $result = $stmt->fetchAll();
 
-        return $result[0]['image'];
+        return $result[0]['picture'];
     }
 
     public function applicationNonInstallee()
@@ -164,7 +164,7 @@ class AccesBD
             ->firstName("Olivier")
             ->lastName("Lafleur")
             ->isAdmin(true)
-            ->image(file_get_contents("usagers_images/sauvage.png"))
+            ->picture(file_get_contents("usagers_images/sauvage.png"))
             ->hasRpi(true)
             ->build();
 
@@ -176,7 +176,7 @@ class AccesBD
             ->firstName("Guillaume")
             ->lastName("Michaud")
             ->isAdmin(true)
-            ->image(file_get_contents("usagers_images/grandschtroumpf.png"))
+            ->picture(file_get_contents("usagers_images/grandschtroumpf.png"))
             ->hasRpi(true)
             ->build();
 
@@ -187,7 +187,7 @@ class AccesBD
             ->email("melissa.clermont@cll.qc.ca")
             ->firstName("Mélissa")
             ->lastName("Clermont")
-            ->image(file_get_contents("usagers_images/schtroumpfette.png"))
+            ->picture(file_get_contents("usagers_images/schtroumpfette.png"))
             ->build();
 
         $gilles = (new EmployeBuilder())
@@ -197,7 +197,7 @@ class AccesBD
             ->email("gilles.champagne@cll.qc.ca")
             ->firstName("Gilles")
             ->lastName("Champagne")
-            ->image(file_get_contents("usagers_images/crayon.png"))
+            ->picture(file_get_contents("usagers_images/crayon.png"))
             ->build();
 
         $josee = (new EmployeBuilder())
@@ -207,7 +207,7 @@ class AccesBD
             ->email("josee.lainesse@cll.qc.ca")
             ->firstName("Josée")
             ->lastName("Lainesse")
-            ->image(file_get_contents("usagers_images/bebe.png"))
+            ->picture(file_get_contents("usagers_images/bebe.png"))
             ->build();
 
         $marc = (new EmployeBuilder())
@@ -217,7 +217,7 @@ class AccesBD
             ->email("marc.deslandes@cll.qc.ca")
             ->firstName("Marc")
             ->lastName("Deslandes")
-            ->image(file_get_contents("usagers_images/fleur.png"))
+            ->picture(file_get_contents("usagers_images/fleur.png"))
             ->build();
 
         $lise = (new EmployeBuilder())
@@ -227,7 +227,7 @@ class AccesBD
             ->email("lise.provencher@cll.qc.ca")
             ->firstName("Lise")
             ->lastName("Provencher")
-            ->image(file_get_contents("usagers_images/tada.png"))
+            ->picture(file_get_contents("usagers_images/tada.png"))
             ->build();
 
         $serge = (new EmployeBuilder())
@@ -237,7 +237,7 @@ class AccesBD
             ->email("serge.levesque@cll.qc.ca")
             ->firstName("Serge")
             ->lastName("Lévesque")
-            ->image(file_get_contents("usagers_images/vantard.png"))
+            ->picture(file_get_contents("usagers_images/vantard.png"))
             ->build();
 
         $this->employeDao->insert($admin);
