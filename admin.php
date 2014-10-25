@@ -33,8 +33,8 @@ include_once "config.php";
         </ul>
 
         <div class="tab-content">
-            <div class="tab-pane active" id="users">
-                <button class="btn btn-success alignright" onclick="window.location.href='admin-put.php'">Nouvel
+            <div class="tab-pane active" id="users"><br>
+                <button class="btn btn-success alignleft" onclick="window.location.href='admin-put.php'">Nouvel
                     utilisateur
                 </button>
                 <br><br>
