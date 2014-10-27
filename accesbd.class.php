@@ -176,7 +176,7 @@ class AccesBD
             ->firstName("Guillaume")
             ->lastName("Michaud")
             ->isAdmin(true)
-            ->picture(file_get_contents("usagers_images/grandschtroumpf.png"))
+            ->picture(file_get_contents("usagers_images/gargamel.jpeg"))
             ->hasRpi(true)
             ->build();
 
