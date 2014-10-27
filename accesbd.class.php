@@ -197,7 +197,7 @@ class AccesBD
             ->email("gilles.champagne@cll.qc.ca")
             ->firstName("Gilles")
             ->lastName("Champagne")
-            ->picture(file_get_contents("usagers_images/crayon.png"))
+            ->picture(file_get_contents("usagers_images/grandschtroumpf.png"))
             ->build();
 
         $josee = (new EmployeBuilder())
