@@ -45,12 +45,31 @@ class AccesBD
                               id INTEGER PRIMARY KEY AUTOINCREMENT,
                               rpiNetwork VARCHAR(20),
                               mailgunDomain VARCHAR(100),
-                              mailgunApiKey VARCHAR(100)
+                              mailgunApiKey VARCHAR(100),
+                              db_updated INTEGER
                               );
                           ");
 
-        $this->pdo->query("INSERT INTO config (id, rpiNetwork, mailgunDomain, mailgunApiKey)
-                            VALUES (1, '192.168.0.0', 'dinf.qc.to', 'key-8gn080hwlfdud6ctmtm1d66ulwg4p0t9')");
+        $this->pdo->query("INSERT INTO config (id, rpiNetwork, mailgunDomain, mailgunApiKey, db_updated)
+                            VALUES (1, '192.168.0.0', 'dinf.qc.to', 'key-8gn080hwlfdud6ctmtm1d66ulwg4p0t9', 1)");
+
+        $this->pdo->query("CREATE TRIGGER update_db_insert AFTER INSERT ON users
+                            BEGIN
+                                UPDATE config SET db_updated = 1;
+                            END;
+                            ");
+
+        $this->pdo->query("CREATE TRIGGER update_db_update AFTER UPDATE ON users
+                            BEGIN
+                                UPDATE config SET db_updated = 1;
+                            END;
+                            ");
+
+        $this->pdo->query("CREATE TRIGGER update_db_delete AFTER DELETE ON users
+                            BEGIN
+                                UPDATE config SET db_updated = 1;
+                            END;
+                            ");
     }
 
     public function modifierRpiNetwork($rpiNetwork)
