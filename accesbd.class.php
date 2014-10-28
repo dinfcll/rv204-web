@@ -259,6 +259,56 @@ class AccesBD
             ->picture(file_get_contents("usagers_images/vantard.png"))
             ->build();
 
+        $yvan = (new EmployeBuilder())
+            ->username("morrisseyy")
+            ->password(password_hash("admin#123", PASSWORD_DEFAULT))
+            ->color("#0074D9")
+            ->email("yvan.morrissey@cll.qc.ca")
+            ->firstName("Yvan")
+            ->lastName("Morrissey")
+            ->picture(file_get_contents("usagers_images/tada.png"))
+            ->build();
+
+        $mers = (new EmployeBuilder())
+            ->username("merciers")
+            ->password(password_hash("admin#123", PASSWORD_DEFAULT))
+            ->color("#7FDBFF")
+            ->email("stephane.mercier@cll.qc.ca")
+            ->firstName("Stéphane")
+            ->lastName("Mercier")
+            ->picture(file_get_contents("usagers_images/fleur.png"))
+            ->build();
+
+        $christian = (new EmployeBuilder())
+            ->username("asselinc")
+            ->password(password_hash("admin#123", PASSWORD_DEFAULT))
+            ->color("#2ECC40")
+            ->email("christian.asselin@cll.qc.ca")
+            ->firstName("Christian")
+            ->lastName("Asselin")
+            ->picture(file_get_contents("usagers_images/vantard.png"))
+            ->build();
+
+        $nelson = (new EmployeBuilder())
+            ->username("marceaun")
+            ->password(password_hash("admin#123", PASSWORD_DEFAULT))
+            ->color("#01FF70")
+            ->email("nelson.marceau@cll.qc.ca")
+            ->firstName("Nelson")
+            ->lastName("Marceau")
+            ->picture(file_get_contents("usagers_images/bebe.png"))
+            ->build();
+
+        $jocelyne = (new EmployeBuilder())
+            ->username("lapointej")
+            ->password(password_hash("admin#123", PASSWORD_DEFAULT))
+            ->color("#FFDC00")
+            ->email("jocelyne.lapointe@cll.qc.ca")
+            ->firstName("Jocelyne")
+            ->lastName("Lapointe")
+            ->picture(file_get_contents("usagers_images/schtroumpfette.png"))
+            ->build();
+
         $this->employeDao->insert($admin);
         $this->employeDao->put($olivier);
         $this->employeDao->put($guillaume);
@@ -268,5 +318,10 @@ class AccesBD
         $this->employeDao->put($marc);
         $this->employeDao->put($lise);
         $this->employeDao->put($serge);
+        $this->employeDao->put($yvan);
+        $this->employeDao->put($mers);
+        $this->employeDao->put($christian);
+        $this->employeDao->put($nelson);
+        $this->employeDao->put($jocelyne);
     }
 }
